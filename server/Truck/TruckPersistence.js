@@ -28,5 +28,15 @@ Module.prototype.getTrucks = function(lat, lng, callback) {
 	});
 };
 
+Module.prototype.getTruckById = function(id, callback) {
+	Truck(sequelize).findOne({
+		where: {
+			truckId: id
+		}
+	}).then(function(truck) {
+		callback(truck);
+	});
+};
+
 var instance = new Module();
 module.exports = instance;
