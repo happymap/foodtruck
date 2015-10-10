@@ -15,7 +15,7 @@ create table schedule (
     state char(50),
     zip char(50),
     display_address varchar(255),
-    longtitude float not null,
+    longitude float not null,
     latitude float not null,
     truck_id int not null,
     primary key (schedule_id)

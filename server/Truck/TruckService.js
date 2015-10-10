@@ -8,7 +8,7 @@ Module.prototype.attachRoutes = function(server) {
 };
 
 Module.prototype.getTrucks = function(req, res, next) {
-	TruckPersistence.getTrucks(function(trucks) {
+	TruckPersistence.getTrucks(37.7833, -122.4167, function(trucks) {
 		if(trucks) {
 			res.send(trucks);
 		} else {
