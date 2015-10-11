@@ -38,5 +38,11 @@ Module.prototype.getTruckById = function(id, callback) {
 	});
 };
 
+Module.prototype.createTruck = function(truck, callback) {
+	Truck(sequelize).create(truck).then(function(truck) {
+		callback(truck);
+	});
+};
+
 var instance = new Module();
 module.exports = instance;

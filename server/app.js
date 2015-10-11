@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var services = ['Truck'];
+var services = ['Truck', 'Schedule'];
 
 var initDynamicRoutes = function(server) {
 	var i, ii;
