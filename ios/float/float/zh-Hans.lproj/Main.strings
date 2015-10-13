@@ -1,0 +1,60 @@
+
+/* Class = "IBUILabel"; text = "label1"; ObjectID = "3Y3-MP-u2i"; */
+"3Y3-MP-u2i.text" = "label1";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "5rF-vW-prL"; */
+"5rF-vW-prL.text" = "Label";
+
+/* Class = "IBUISegmentedControl"; 6b1-Iv-t7G.segmentTitles[0] = "Past"; ObjectID = "6b1-Iv-t7G"; */
+"6b1-Iv-t7G.segmentTitles[0]" = "Past";
+
+/* Class = "IBUISegmentedControl"; 6b1-Iv-t7G.segmentTitles[1] = "Upcoming"; ObjectID = "6b1-Iv-t7G"; */
+"6b1-Iv-t7G.segmentTitles[1]" = "Upcoming";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "FNX-B2-7qQ"; */
+"FNX-B2-7qQ.text" = "Label";
+
+/* Class = "IBUITextView"; text = "test"; ObjectID = "FgX-2K-O2M"; */
+"FgX-2K-O2M.text" = "test";
+
+/* Class = "IBUINavigationItem"; title = "My Trips"; ObjectID = "Mgn-hd-L2A"; */
+"Mgn-hd-L2A.title" = "My Trips";
+
+/* Class = "IBUILabel"; text = "200 Series | Uniform Wares"; ObjectID = "Omr-rN-n5c"; */
+"Omr-rN-n5c.text" = "200 Series | Uniform Wares";
+
+/* Class = "IBUINavigationItem"; title = "My Profile"; ObjectID = "WLT-iu-1W6"; */
+"WLT-iu-1W6.title" = "My Profile";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "a5G-zK-c9D"; */
+"a5G-zK-c9D.text" = "Title";
+
+/* Class = "IBUILabel"; text = "Explore"; ObjectID = "aeB-VM-oZV"; */
+"aeB-VM-oZV.text" = "Explore";
+
+/* Class = "IBUIButton"; normalTitle = "Sign In"; ObjectID = "hIR-Q4-pVV"; */
+"hIR-Q4-pVV.normalTitle" = "Sign In";
+
+/* Class = "IBUILabel"; text = "label2"; ObjectID = "i4T-05-17G"; */
+"i4T-05-17G.text" = "label2";
+
+/* Class = "IBUIButton"; normalTitle = "Sign Up"; ObjectID = "las-2z-Roj"; */
+"las-2z-Roj.normalTitle" = "Sign Up";
+
+/* Class = "IBUILabel"; text = "Login with facebook"; ObjectID = "mdh-7d-8t0"; */
+"mdh-7d-8t0.text" = "Login with facebook";
+
+/* Class = "IBUILabel"; text = "18 reviews"; ObjectID = "n3M-eM-LJ1"; */
+"n3M-eM-LJ1.text" = "18 reviews";
+
+/* Class = "IBUILabel"; text = "wtf"; ObjectID = "olx-B1-FbU"; */
+"olx-B1-FbU.text" = "wtf";
+
+/* Class = "IBUINavigationItem"; title = "Product Detail"; ObjectID = "owe-dq-lB5"; */
+"owe-dq-lB5.title" = "Product Detail";
+
+/* Class = "IBUILabel"; text = "$249"; ObjectID = "zBF-yL-QbG"; */
+"zBF-yL-QbG.text" = "$249";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "zv2-Zp-hrD"; */
+"zv2-Zp-hrD.text" = "Name";

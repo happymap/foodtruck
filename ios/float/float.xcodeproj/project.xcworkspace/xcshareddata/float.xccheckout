@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7B79DA74-86BE-423E-851F-692896F4DDAD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>float</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5FA42F1D829CF0567423164F0FEF6E49F324A361</key>
+		<string>github.com:blw/boat_redo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/float/float.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5FA42F1D829CF0567423164F0FEF6E49F324A361</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:blw/boat_redo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5FA42F1D829CF0567423164F0FEF6E49F324A361</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5FA42F1D829CF0567423164F0FEF6E49F324A361</string>
+			<key>IDESourceControlWCCName</key>
+			<string>boat_redo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
