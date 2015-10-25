@@ -45,7 +45,7 @@ class ViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:truckCell = tableView.dequeueReusableCellWithIdentifier("truckCell") as! truckCell
-        cell.loadItem(truckList[indexPath.row]["name"] as! String)
+        cell.loadItem(truckList[indexPath.row]["name"] as! String, logoUrl: truckList[indexPath.row]["logo"] as! String)
         return cell
     }
     
@@ -72,8 +72,23 @@ class truckCell : UITableViewCell {
     @IBOutlet var truckImgVuew: UIImageView!
     @IBOutlet var truckNameLabel: UILabel!
     
-    func loadItem(truckName: String) {
+    func loadItem(truckName: String, logoUrl: String) {
         truckNameLabel.text = truckName
+        
+        let url: NSURL = NSURL(string: "http://localhost:3000/static/images/japacurry_logo.png")!
+        
+        getDataFromUrl(url) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                guard let data = data where error == nil else { return }
+                self.truckImgVuew.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
     }
 }
 

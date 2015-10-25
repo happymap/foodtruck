@@ -16,6 +16,10 @@ var truckSchema = {
 	description: {
 		type: Sequelize.STRING,
 		field: 'description'
+	},
+	logo: {
+		type: Sequelize.STRING,
+		field: 'logo'
 	}
 };
 
