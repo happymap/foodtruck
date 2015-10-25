@@ -9,22 +9,25 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UITableViewController {
 
+    var truckList:[AnyObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // get list of trucks
         let url = NSURL(string: "http://ngtemplates.com:3000/truck/list")
         
+        let nib = UINib(nibName: "truckCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "truckCell")
+        
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            for element: AnyObject in self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String) {
-                let name = element["name"] as? String
-                let distance = element["distance"] as? Float
-                
-                print(name)
-                print(distance)
-            }
+            self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
         }
         
         task.resume()
@@ -35,13 +38,19 @@ class ViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return truckList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell:truckCell = tableView.dequeueReusableCellWithIdentifier("truckCell") as! truckCell
+        cell.loadItem(truckList[indexPath.row]["name"] as! String)
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
     }
     
     // convert string to json object
@@ -56,6 +65,15 @@ class ViewController: UIViewController, UITableViewDataSource {
             }
         }
         return [AnyObject]()
+    }
+}
+
+class truckCell : UITableViewCell {
+    @IBOutlet var truckImgVuew: UIImageView!
+    @IBOutlet var truckNameLabel: UILabel!
+    
+    func loadItem(truckName: String) {
+        truckNameLabel.text = truckName
     }
 }
 

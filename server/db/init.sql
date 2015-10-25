@@ -4,6 +4,7 @@ create table IF NOT EXISTS truck (
 	truck_id int not null auto_increment,
     name char(50) not null,
     description varchar(255) null,
+    logo_image varchar(255) null,
     primary key (truck_id)
 );
 

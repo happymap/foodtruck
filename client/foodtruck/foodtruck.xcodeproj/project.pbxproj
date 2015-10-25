@@ -14,6 +14,7 @@
 		814142751BD0DB4A001D264D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814142731BD0DB4A001D264D /* LaunchScreen.storyboard */; };
 		814142801BD0DB4A001D264D /* foodtruckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141427F1BD0DB4A001D264D /* foodtruckTests.swift */; };
 		8141428B1BD0DB4A001D264D /* foodtruckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141428A1BD0DB4A001D264D /* foodtruckUITests.swift */; };
+		8163CB281BDB64DF00A40707 /* truckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8163CB271BDB64DF00A40707 /* truckCell.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		814142861BD0DB4A001D264D /* foodtruckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = foodtruckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8141428A1BD0DB4A001D264D /* foodtruckUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodtruckUITests.swift; sourceTree = "<group>"; };
 		8141428C1BD0DB4A001D264D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8163CB271BDB64DF00A40707 /* truckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = truckCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				8141426E1BD0DB4A001D264D /* Main.storyboard */,
 				814142711BD0DB4A001D264D /* Assets.xcassets */,
 				814142731BD0DB4A001D264D /* LaunchScreen.storyboard */,
+				8163CB271BDB64DF00A40707 /* truckCell.xib */,
 				814142761BD0DB4A001D264D /* Info.plist */,
 			);
 			path = foodtruck;
@@ -230,6 +233,7 @@
 			files = (
 				814142751BD0DB4A001D264D /* LaunchScreen.storyboard in Resources */,
 				814142721BD0DB4A001D264D /* Assets.xcassets in Resources */,
+				8163CB281BDB64DF00A40707 /* truckCell.xib in Resources */,
 				814142701BD0DB4A001D264D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +485,7 @@
 				814142911BD0DB4A001D264D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		814142921BD0DB4A001D264D /* Build configuration list for PBXNativeTarget "foodtruckTests" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +494,7 @@
 				814142941BD0DB4A001D264D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		814142951BD0DB4A001D264D /* Build configuration list for PBXNativeTarget "foodtruckUITests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +503,7 @@
 				814142971BD0DB4A001D264D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,6 +12,8 @@ var initDynamicRoutes = function(server) {
 
 initDynamicRoutes(app);
 
+app.use('/static', express.static('public'));
+
 var server = app.listen(3000, function() {
 	var host = server.address().address;
 	var port = server.address().port;
