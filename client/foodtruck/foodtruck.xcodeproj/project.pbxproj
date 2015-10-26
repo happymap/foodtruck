@@ -15,6 +15,8 @@
 		814142801BD0DB4A001D264D /* foodtruckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141427F1BD0DB4A001D264D /* foodtruckTests.swift */; };
 		8141428B1BD0DB4A001D264D /* foodtruckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141428A1BD0DB4A001D264D /* foodtruckUITests.swift */; };
 		8163CB281BDB64DF00A40707 /* truckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8163CB271BDB64DF00A40707 /* truckCell.xib */; settings = {ASSET_TAGS = (); }; };
+		8163CB2A1BDE015800A40707 /* environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8163CB291BDE015800A40707 /* environment.plist */; settings = {ASSET_TAGS = (); }; };
+		8163CB2C1BDE021300A40707 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163CB2B1BDE021300A40707 /* Util.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		8141428A1BD0DB4A001D264D /* foodtruckUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodtruckUITests.swift; sourceTree = "<group>"; };
 		8141428C1BD0DB4A001D264D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8163CB271BDB64DF00A40707 /* truckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = truckCell.xib; sourceTree = "<group>"; };
+		8163CB291BDE015800A40707 /* environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = environment.plist; sourceTree = "<group>"; };
+		8163CB2B1BDE021300A40707 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				814142731BD0DB4A001D264D /* LaunchScreen.storyboard */,
 				8163CB271BDB64DF00A40707 /* truckCell.xib */,
 				814142761BD0DB4A001D264D /* Info.plist */,
+				8163CB291BDE015800A40707 /* environment.plist */,
+				8163CB2B1BDE021300A40707 /* Util.swift */,
 			);
 			path = foodtruck;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				814142721BD0DB4A001D264D /* Assets.xcassets in Resources */,
 				8163CB281BDB64DF00A40707 /* truckCell.xib in Resources */,
 				814142701BD0DB4A001D264D /* Main.storyboard in Resources */,
+				8163CB2A1BDE015800A40707 /* environment.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8141426D1BD0DB4A001D264D /* ViewController.swift in Sources */,
+				8163CB2C1BDE021300A40707 /* Util.swift in Sources */,
 				8141426B1BD0DB4A001D264D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

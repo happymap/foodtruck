@@ -10,6 +10,8 @@ import UIKit
 import Foundation
 
 class ViewController: UITableViewController {
+    
+    let util = Util()
 
     var truckList:[AnyObject] = []
     
@@ -17,7 +19,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         // get list of trucks
-        let url = NSURL(string: "http://ngtemplates.com:3000/truck/list")
+        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list")
         
         let nib = UINib(nibName: "truckCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "truckCell")
@@ -45,7 +47,7 @@ class ViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:truckCell = tableView.dequeueReusableCellWithIdentifier("truckCell") as! truckCell
-        cell.loadItem(truckList[indexPath.row]["name"] as! String, logoUrl: truckList[indexPath.row]["logo"] as! String)
+        cell.loadItem(truckList[indexPath.row]["name"] as! String, logoUrl: truckList[indexPath.row]["logo"] as! String, distance: truckList[indexPath.row]["distance"] as! Float)
         return cell
     }
     
@@ -69,13 +71,17 @@ class ViewController: UITableViewController {
 }
 
 class truckCell : UITableViewCell {
+    
+    let util = Util()
+    
     @IBOutlet var truckImgVuew: UIImageView!
     @IBOutlet var truckNameLabel: UILabel!
+    @IBOutlet var distanceLable: UILabel!
     
-    func loadItem(truckName: String, logoUrl: String) {
+    func loadItem(truckName: String, logoUrl: String, distance: Float) {
         truckNameLabel.text = truckName
         
-        let url: NSURL = NSURL(string: "http://localhost:3000/static/images/japacurry_logo.png")!
+        let url: NSURL = NSURL(string: util.getEnvProperty("host") + logoUrl)!
         
         getDataFromUrl(url) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -83,6 +89,8 @@ class truckCell : UITableViewCell {
                 self.truckImgVuew.image = UIImage(data: data)
             }
         }
+        
+        distanceLable.text = String(format: "%.2f", distance)
     }
     
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
