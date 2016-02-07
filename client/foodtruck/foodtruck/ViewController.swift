@@ -8,31 +8,30 @@
 
 import UIKit
 import Foundation
+import CoreLocation
 
-class ViewController: UITableViewController {
+class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     let util = Util()
+    let locationManager = CLLocationManager()
 
     var truckList:[AnyObject] = []
+    var currentLat:Double!
+    var currentLong:Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // get list of trucks
-        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list")
+        // get location
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         
         let nib = UINib(nibName: "truckCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "truckCell")
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-            })
-        }
-        
-        task.resume()
+        self.refreshTable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +54,14 @@ class ViewController: UITableViewController {
         return 70
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let coord = ((locations as NSArray).lastObject as! CLLocation).coordinate
+        self.currentLat = coord.latitude
+        self.currentLong = coord.longitude
+        
+        self.refreshTable()
+    }
+    
     // convert string to json object
     func JSONParseArray(string: String) -> [AnyObject]{
         if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
@@ -67,6 +74,25 @@ class ViewController: UITableViewController {
             }
         }
         return [AnyObject]()
+    }
+    
+    func refreshTable() {
+        if currentLat == nil || currentLong == nil {
+            return
+        }
+        
+        // get list of trucks
+        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?latitude=" + String(currentLat) + "&longitude=" + String(currentLong))
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
+        }
+        
+        task.resume()
     }
 }
 
