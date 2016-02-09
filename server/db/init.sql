@@ -1,3 +1,8 @@
+CREATE DATABASE food_truck;
+
+CREATE USER 'foodtruck'@'localhost' IDENTIFIED BY 'please';
+GRANT ALL PRIVILEGES ON *.* TO 'foodtruck'@'please';
+
 use food_truck;
 
 create table IF NOT EXISTS truck (
