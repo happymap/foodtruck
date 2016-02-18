@@ -202,6 +202,11 @@
 					814142661BD0DB4A001D264D = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = S7368WEFRH;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					8141427A1BD0DB4A001D264D = {
 						CreatedOnToolsVersion = 7.0.1;

@@ -15,6 +15,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     let util = Util()
     let locationManager = CLLocationManager()
 
+
     var truckList:[AnyObject] = []
     var currentLat:Double!
     var currentLong:Double!
@@ -24,8 +25,9 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         
         // get location
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 100
         locationManager.startUpdatingLocation()
         
         let nib = UINib(nibName: "truckCell", bundle: nil)
@@ -59,8 +61,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         self.currentLat = coord.latitude
         self.currentLong = coord.longitude
         
+        // stop update after
+        self.locationManager.stopUpdatingLocation();
         self.refreshTable()
     }
+
     
     // convert string to json object
     func JSONParseArray(string: String) -> [AnyObject]{
