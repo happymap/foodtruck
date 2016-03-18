@@ -3,9 +3,11 @@
 import csv
 import copy
 import re
+import MySQLdb
 
 DAYS_COUNTER = {"mo":0, "tu":0, "we":0, "th":0, "fr":0, "sa":0, "su":0}
 DAYS_LIST = ["mo", "tu", "we", "th", "fr", "sa", "su"]
+DAYS_VALUE = {"mo":1, "tu":2, "we":3, "th":4, "fr":5, "sa":6, "su":7}
 
 # examples:
 # 1. Mo-Su:10AM-6PM
@@ -62,12 +64,21 @@ def hours_parser(hours):
 def get_actual_hour(hour_str):
 	num = int(re.findall(r'\d+', hour_str)[0])
 	if 'PM' in hour_str:
-		return num + 12
+		if num == 12:
+			return num
+		else:
+			return num + 12
 	elif 'AM' in hour_str:
-		return num
+		if num == 12:
+			return 0
+		else:
+			return num
 	else:
 		return -1
 
+# DB conncetion
+db = MySQLdb.connect(host="localhost", user="foodtruck", passwd="please", db="food_truck")
+cur = db.cursor()
 
 with open('Mobile_Food_Facility_Permit.csv') as csvfile:
 	reader = csv.reader(csvfile, delimiter=',',  quotechar='"')
@@ -77,6 +88,21 @@ with open('Mobile_Food_Facility_Permit.csv') as csvfile:
 		if status != "APPROVED":
 			continue
 		dayshours = row[17]
+		address = row[5]
+		lat =  row[14]
+		lon = row[15]
+		name = row[1]
+		application_id = row[0]
+
+		if len(lat.strip()) == 0 or len(lon.strip()) == 0:
+			continue
+
+		truck_insert_script = 'insert into truck(name, application_id, latitude, longitude, address) values("' + name + '",' + application_id + ',' + lat + ',' + lon + ',"' + address + '"' + ')'
+		cur.execute(truck_insert_script)
+
+		db.commit()
+
+		truck_id = cur.lastrowid
 
 		groups = dayshours.split(';')
 		for group in groups:
@@ -88,7 +114,14 @@ with open('Mobile_Food_Facility_Permit.csv') as csvfile:
 			dates = parts[0]
 			hours = parts[1]
 
-			print dates_parser(dates)
-			print hours_parser(hours)
+			parsed_days = dates_parser(dates)
+			parsed_hours = hours_parser(hours)
 
+			for day in parsed_days:
+				for hour in parsed_hours:
+					start_hour = hour[0]
+					end_hour = hour[1]
 
+					schedule_insert_script = 'insert into schedule(day, start_hour, end_hour, truck_id) values(' + str(DAYS_VALUE[day]) + ',' + str(start_hour) + ',' + str(end_hour) + ',' + str(truck_id) + ')'
+					cur.execute(schedule_insert_script)
+					db.commit()
