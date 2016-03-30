@@ -9,7 +9,11 @@ Module.prototype.attachRoutes = function(server) {
 };
 
 Module.prototype.getTrucks = function(req, res, next) {
-	TruckPersistence.getTrucks(37.7833, -122.4167, function(trucks) {
+	var lon = req.query.lon;
+	var lat = req.query.lat;
+	var day = req.query.day;
+	var hour = req.query.hour;
+	TruckPersistence.getTrucks(lat, lon, day, hour, function(trucks) {
 		if(trucks) {
 			res.send(trucks);
 		} else {
