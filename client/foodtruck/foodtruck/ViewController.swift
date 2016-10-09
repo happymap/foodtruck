@@ -48,6 +48,10 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:truckCell = tableView.dequeueReusableCellWithIdentifier("truckCell") as! truckCell
+        var logoUrl:String = ""
+        if !(truckList[indexPath.row]["logo"] ?? "").isEmpty {
+            logoUrl = truckList[indexPath.row].dictionaryForKey("logo")
+        }
         cell.loadItem(truckList[indexPath.row]["name"] as! String, logoUrl: truckList[indexPath.row]["logo"] as! String, distance: truckList[indexPath.row]["distance"] as! Float)
         return cell
     }
@@ -87,7 +91,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         // get list of trucks
-        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?latitude=" + String(currentLat) + "&longitude=" + String(currentLong))
+        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=1&hour=12")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
@@ -112,12 +116,12 @@ class truckCell : UITableViewCell {
     func loadItem(truckName: String, logoUrl: String, distance: Float) {
         truckNameLabel.text = truckName
         
-        let url: NSURL = NSURL(string: util.getEnvProperty("host") + logoUrl)!
-        
-        getDataFromUrl(url) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let data = data where error == nil else { return }
-                self.truckImgVuew.image = UIImage(data: data)
+        if let url: NSURL = NSURL(string: util.getEnvProperty("host") + logoUrl)! {
+            getDataFromUrl(url) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    guard let data = data where error == nil else { return }
+                    self.truckImgVuew.image = UIImage(data: data)
+                }
             }
         }
         
