@@ -19,7 +19,6 @@ var nearbyTrucksQuery = function(lat, lng, distance, day, hour) {
 + "ORDER  BY distance ";
 };
 
-
 Module.prototype.getAllTrucks = function(callback) {
 	Truck(sequelize).findAll().then(function(trucks) {
 		callback(trucks);

@@ -13,11 +13,18 @@ Module.prototype.getTrucks = function(req, res, next) {
 	var lat = req.query.lat;
 	var day = req.query.day;
 	var hour = req.query.hour;
+
+	// validate params
+	if (!(lon && lat && day && hour)) {
+		res.sendStatus(400);
+		return;
+	}
+
 	TruckPersistence.getTrucks(lat, lon, day, hour, function(trucks) {
 		if(trucks) {
-			res.send(trucks);
+			res.sendStatus(JSON.stringify(trucks));
 		} else {
-			res.send(400);
+			res.sendStatus(400);
 		}
 	});
 };
@@ -26,9 +33,9 @@ Module.prototype.getTruckById = function(req, res, next) {
 	var truckId = req.params.id;
 	TruckPersistence.getTruckById(truckId, function(truck) {
 		if(truck) {
-			res.send(truck);
+			res.sendStatus(truck);
 		} else {
-			res.send(400);
+			res.sendStatus(400);
 		}
 	});
 };

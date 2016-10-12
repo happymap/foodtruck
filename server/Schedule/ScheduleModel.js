@@ -9,13 +9,17 @@ var scheduleSchema = {
 		field: 'schedule_id',
 		primaryKey: true
 	},
-	startTime: {
-		type: Sequelize.DATE,
-		field: 'start_time'
+	day: {
+		type: Sequelize.INTEGER,
+		field: 'day'
 	},
-	endTime: {
-		type: Sequelize.DATE,
-		field: 'end_time'
+	startHour: {
+		type: Sequelize.FLOAT,
+		field: 'start_hour'
+	},
+	endHour: {
+		type: Sequelize.FLOAT,
+		field: 'end_hour'
 	},
 	address: {
 		type: Sequelize.STRING,
@@ -32,10 +36,6 @@ var scheduleSchema = {
 	zip: {
 		type: Sequelize.STRING,
 		field: 'zip'
-	},
-	displayAddress: {
-		type: Sequelize.STRING,
-		field: 'display_address'
 	},
 	longitude: {
 		type: Sequelize.FLOAT,

@@ -10,6 +10,8 @@
 		"express": "^4.13.3",
 		"mysql": "2.9.0",
 		"sequelize": "3.11.0",
-		"async": "1.4.2"
+		"async": "1.4.2",
+		"scraperjs": "1.2.0",
+		"request": "2.75.0"
 	}
 }
