@@ -13,13 +13,13 @@ var scheduleSchema = {
 		type: Sequelize.INTEGER,
 		field: 'day'
 	},
-	startHour: {
+	startTime: {
 		type: Sequelize.FLOAT,
-		field: 'start_hour'
+		field: 'start_time'
 	},
-	endHour: {
+	endTime: {
 		type: Sequelize.FLOAT,
-		field: 'end_hour'
+		field: 'end_time'
 	},
 	address: {
 		type: Sequelize.STRING,
@@ -48,6 +48,10 @@ var scheduleSchema = {
 	truckId: {
 		type: Sequelize.BIGINT,
 		field: 'truck_id'
+	},
+	displayAddress: {
+		type: Sequelize.STRING,
+		field: 'display_address'
 	}
 };
 

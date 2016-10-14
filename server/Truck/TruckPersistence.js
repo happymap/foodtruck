@@ -5,7 +5,7 @@ var Module = function() {
 };
 
 var nearbyTrucksQuery = function(lat, lng, distance, day, hour) {
-	return "SELECT truck.truck_id, truck.address, name, description, logo, schedule.start_hour, schedule.end_hour, "
+	return "SELECT truck.truck_id, schedule.display_address, name, description, logo, schedule.start_time, schedule.end_time, "
 + "SQRT(POW(69.1 * (latitude - " + lat + "), 2) "
 + "+ POW(69.1 * (" + lng + " - longitude) * COS(latitude / 57.3), 2)) AS "
 + "distance "
