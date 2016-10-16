@@ -4,8 +4,8 @@ var Truck = require('./TruckModel');
 var Module = function() {
 };
 
-var nearbyTrucksQuery = function(lat, lng, distance, day, hour) {
-	return "SELECT truck.truck_id, schedule.display_address, name, description, logo, schedule.start_time, schedule.end_time, "
+var nearbyTrucksQuery = function(lat, lng, distance, day, time) {
+	return "SELECT truck.truck_id, schedule.display_address, truck.name, truck.description, truck.logo, schedule.start_time, schedule.end_time, "
 + "SQRT(POW(69.1 * (latitude - " + lat + "), 2) "
 + "+ POW(69.1 * (" + lng + " - longitude) * COS(latitude / 57.3), 2)) AS "
 + "distance "
@@ -13,8 +13,8 @@ var nearbyTrucksQuery = function(lat, lng, distance, day, hour) {
 + "JOIN truck ON schedule.truck_id = truck.truck_id "
 + "WHERE day = " + day + " "
 + "and name NOT LIKE '%catering%' "
-+ "and start_hour <= " + hour + " "
-+ "and end_hour >= " + hour + " "
++ "and start_time <= " + time + " "
++ "and end_time >= " + time + " "
 + "HAVING distance < " + distance + " "
 + "ORDER  BY distance ";
 };
