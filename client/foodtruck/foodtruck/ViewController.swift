@@ -48,11 +48,9 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:truckCell = tableView.dequeueReusableCellWithIdentifier("truckCell") as! truckCell
-        var logoUrl:String = ""
-        if !(truckList[indexPath.row]["logo"] ?? "").isEmpty {
-            logoUrl = truckList[indexPath.row].dictionaryForKey("logo")
-        }
-        cell.loadItem(truckList[indexPath.row]["name"] as! String, logoUrl: truckList[indexPath.row]["logo"] as! String, distance: truckList[indexPath.row]["distance"] as! Float)
+        let truck:NSDictionary = truckList[indexPath.row] as! NSDictionary
+       
+        cell.loadItem(truck.valueForKey("name") as! String, logoUrl: truck.valueForKey("logo") as! String, distance: truck.valueForKey("distance") as! Float)
         return cell
     }
     
@@ -91,9 +89,10 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         // get list of trucks
-        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=1&hour=12")
-        
+        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=2&time=43200")
+
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -116,7 +115,7 @@ class truckCell : UITableViewCell {
     func loadItem(truckName: String, logoUrl: String, distance: Float) {
         truckNameLabel.text = truckName
         
-        if let url: NSURL = NSURL(string: util.getEnvProperty("host") + logoUrl)! {
+        if let url: NSURL = NSURL(string: logoUrl)! {
             getDataFromUrl(url) { (data, response, error)  in
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
                     guard let data = data where error == nil else { return }

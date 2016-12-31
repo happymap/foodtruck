@@ -35,5 +35,9 @@ Module.prototype.updateSchedules = function(req, res, next) {
 	});
 };
 
+Module.prototype.saveSchedule = function() {
+	
+}
+
 var instance = new Module();
 module.exports = instance;

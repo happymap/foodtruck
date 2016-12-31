@@ -24,5 +24,24 @@ Module.prototype.getFullAddress = function(address, cb) {
 	});
 };
 
+Module.prototype.getIntFromDay = function(day) {
+	switch(day.toLowerCase()) {
+		case 'monday':
+			return 0;
+		case 'tuesday':
+			return 1;
+		case 'wednesday':
+			return 2;
+		case 'thursday':
+			return 3;
+		case 'friday':
+			return 4;
+		case 'saturday':
+			return 5;
+		case 'sunday':
+			return 6;	
+	}
+};
+
 var instance = new Module();
 module.exports = instance;

@@ -21,8 +21,11 @@ Module.prototype.getTrucks = function(req, res, next) {
 	}
 
 	TruckPersistence.getTrucks(lat, lon, day, time, function(trucks) {
+
+		console.log("Got trucks!", trucks);
+
 		if(trucks) {
-			res.sendStatus(JSON.stringify(trucks));
+			res.send(JSON.stringify(trucks));
 		} else {
 			res.sendStatus(400);
 		}
@@ -33,7 +36,7 @@ Module.prototype.getTruckById = function(req, res, next) {
 	var truckId = req.params.id;
 	TruckPersistence.getTruckById(truckId, function(truck) {
 		if(truck) {
-			res.sendStatus(truck);
+			res.send(truck);
 		} else {
 			res.sendStatus(400);
 		}

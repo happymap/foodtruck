@@ -44,7 +44,7 @@ scraperjs.StaticScraper.create('http://japacurry.com')
 function saveSchedule(startTime, endTime, address, day) {
 	utils.getFullAddress(address + ", San Francisco, CA", function(geoCoder) {
 		var scheduleToSave = {
-			'day': getIntFromDay(day),
+			'day': utils.getIntFromDay(day),
 			'startTime': startTime,
 			'endTime': endTime,
 			'address': address,
@@ -66,23 +66,4 @@ function saveSchedule(startTime, endTime, address, day) {
 			}
 		});
 	});
-}
-
-function getIntFromDay(day) {
-	switch(day.toLowerCase()) {
-		case 'monday':
-			return 0;
-		case 'tuesday':
-			return 1;
-		case 'wednesday':
-			return 2;
-		case 'thursday':
-			return 3;
-		case 'friday':
-			return 4;
-		case 'saturday':
-			return 5;
-		case 'sunday':
-			return 6;	
-	}
 }

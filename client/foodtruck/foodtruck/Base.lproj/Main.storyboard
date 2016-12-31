@@ -27,12 +27,50 @@
                             <outlet property="delegate" destination="BCi-7I-8NL" id="Gew-vr-giM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="UMq-2m-VnJ"/>
+                    <navigationItem key="navigationItem" id="UMq-2m-VnJ">
+                        <barButtonItem key="rightBarButtonItem" title="Map" style="plain" id="xGc-Ri-JMf">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="voP-Cs-W1d">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Map"/>
+                                <connections>
+                                    <segue destination="gkt-Gj-Vwq" kind="show" id="3mW-gv-0z7"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0f-Ih-kTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="702.5" y="225.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="HRf-78-lhb">
+            <objects>
+                <viewController id="gkt-Gj-Vwq" customClass="MapViewController" customModule="foodtruck" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JRf-1E-kZg"/>
+                        <viewControllerLayoutGuide type="bottom" id="oCj-Ax-w4T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6pF-n2-1FT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SdG-7S-WWz">
+                                <rect key="frame" x="-5" y="64" width="380" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="mapView" destination="SdG-7S-WWz" id="RGY-Fw-4k4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJk-nf-hv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153.5" y="225.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="znF-FE-LlQ">
