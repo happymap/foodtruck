@@ -12,9 +12,7 @@ import CoreLocation
 
 class ViewController: UITableViewController, CLLocationManagerDelegate {
     
-    let util = Util()
     let locationManager = CLLocationManager()
-
 
     var truckList:[AnyObject] = []
     var currentLat:Double!
@@ -68,32 +66,17 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         self.refreshTable()
     }
 
-    
-    // convert string to json object
-    func JSONParseArray(string: String) -> [AnyObject]{
-        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
-            do {
-                if let array = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [AnyObject] {
-                    return array
-                }
-            } catch {
-                print("error")
-            }
-        }
-        return [AnyObject]()
-    }
-    
     func refreshTable() {
         if currentLat == nil || currentLong == nil {
             return
         }
         
         // get list of trucks
-        let url = NSURL(string: util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=2&time=43200")
+        let url = NSURL(string: Util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=2&time=43200")
 
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            self.truckList = self.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
@@ -105,8 +88,6 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 }
 
 class truckCell : UITableViewCell {
-    
-    let util = Util()
     
     @IBOutlet var truckImgVuew: UIImageView!
     @IBOutlet var truckNameLabel: UILabel!

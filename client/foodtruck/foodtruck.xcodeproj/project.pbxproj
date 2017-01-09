@@ -18,6 +18,7 @@
 		8163CB281BDB64DF00A40707 /* truckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8163CB271BDB64DF00A40707 /* truckCell.xib */; };
 		8163CB2A1BDE015800A40707 /* environment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8163CB291BDE015800A40707 /* environment.plist */; };
 		8163CB2C1BDE021300A40707 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163CB2B1BDE021300A40707 /* Util.swift */; };
+		81FB3FF01E17B3C600D03297 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB3FEF1E17B3C600D03297 /* Annotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		8163CB271BDB64DF00A40707 /* truckCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = truckCell.xib; sourceTree = "<group>"; };
 		8163CB291BDE015800A40707 /* environment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = environment.plist; sourceTree = "<group>"; };
 		8163CB2B1BDE021300A40707 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		81FB3FEF1E17B3C600D03297 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				8163CB291BDE015800A40707 /* environment.plist */,
 				8163CB2B1BDE021300A40707 /* Util.swift */,
 				810105771DCB1CF000839485 /* MapViewController.swift */,
+				81FB3FEF1E17B3C600D03297 /* Annotation.swift */,
 			);
 			path = foodtruck;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8141426D1BD0DB4A001D264D /* ViewController.swift in Sources */,
+				81FB3FF01E17B3C600D03297 /* Annotation.swift in Sources */,
 				8163CB2C1BDE021300A40707 /* Util.swift in Sources */,
 				8141426B1BD0DB4A001D264D /* AppDelegate.swift in Sources */,
 				810105781DCB1CF000839485 /* MapViewController.swift in Sources */,

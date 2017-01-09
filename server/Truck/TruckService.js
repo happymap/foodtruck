@@ -4,6 +4,7 @@ var Module = function() {
 };
 
 Module.prototype.attachRoutes = function(server) {
+	server.get('/truck/map', this.getTruckByRange);
 	server.get('/truck/list', this.getTrucks);
 	server.get('/truck/:id', this.getTruckById);
 };
@@ -21,10 +22,7 @@ Module.prototype.getTrucks = function(req, res, next) {
 	}
 
 	TruckPersistence.getTrucks(lat, lon, day, time, function(trucks) {
-
-		console.log("Got trucks!", trucks);
-
-		if(trucks) {
+		if (trucks) {
 			res.send(JSON.stringify(trucks));
 		} else {
 			res.sendStatus(400);
@@ -41,6 +39,24 @@ Module.prototype.getTruckById = function(req, res, next) {
 			res.sendStatus(400);
 		}
 	});
+};
+
+Module.prototype.getTruckByRange = function(req, res, next) {
+	var maxLat = req.query.maxLat;
+	var minLat = req.query.minLat;
+	var maxLon = req.query.maxLon;
+	var minLon = req.query.minLon;
+	var day = req.query.day;
+	var time = req.query.time;
+
+	TruckPersistence.getTruckByRange(maxLat, minLat, maxLon, minLon, day, time, function(trucks) {
+		if (trucks) {
+			res.send(JSON.stringify(trucks));
+		} else {
+			res.sendStatus(400);
+		}
+	});
+
 };
 
 var instance = new Module();
