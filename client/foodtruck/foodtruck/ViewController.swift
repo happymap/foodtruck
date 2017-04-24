@@ -56,6 +56,12 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         return 70
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails")
+        self.presentViewController(modalViewController, animated: true, completion: nil)
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coord = ((locations as NSArray).lastObject as! CLLocation).coordinate
         self.currentLat = coord.latitude

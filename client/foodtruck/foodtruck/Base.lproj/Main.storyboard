@@ -4,6 +4,37 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Truck Details Modal Controller-->
+        <scene sceneID="UGM-sX-RJE">
+            <objects>
+                <viewController storyboardIdentifier="TruckDetails" id="xW7-Jf-HWY" customClass="TruckDetailsModalController" customModule="foodtruck" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BgI-F3-8Mw"/>
+                        <viewControllerLayoutGuide type="bottom" id="vH4-y7-nL2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i48-iN-ilH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3i-L8-qZ7">
+                                <rect key="frame" x="314" y="28" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="done:" destination="xW7-Jf-HWY" eventType="touchUpInside" id="fqs-0V-IWt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="doneBtn" destination="m3i-L8-qZ7" id="VM5-11-evi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HyB-e1-0qD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="702.5" y="-517.5"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="vHq-WO-4W0">
             <objects>
