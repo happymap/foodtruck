@@ -58,8 +58,9 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails")
+        let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails") as! TruckDetailsModalController
         self.presentViewController(modalViewController, animated: true, completion: nil)
+        modalViewController.assignDetails(self.truckList[indexPath.item] as! NSDictionary)
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -95,29 +96,14 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
 class truckCell : UITableViewCell {
     
-    @IBOutlet var truckImgVuew: UIImageView!
+    @IBOutlet var truckImgView: UIImageView!
     @IBOutlet var truckNameLabel: UILabel!
     @IBOutlet var distanceLable: UILabel!
     
     func loadItem(truckName: String, logoUrl: String, distance: Float) {
         truckNameLabel.text = truckName
-        
-        if let url: NSURL = NSURL(string: logoUrl)! {
-            getDataFromUrl(url) { (data, response, error)  in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    guard let data = data where error == nil else { return }
-                    self.truckImgVuew.image = UIImage(data: data)
-                }
-            }
-        }
-        
+        Util.loadImage(self.truckImgView, imageUrl: logoUrl)
         distanceLable.text = String(format: "%.2f", distance)
-    }
-    
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
     }
 }
 

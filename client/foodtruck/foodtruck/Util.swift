@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Util {
     
@@ -28,6 +29,32 @@ class Util {
             }
         }
         return [AnyObject]()
+    }
+    
+    class func convertToHours(seconds: Int) -> String {
+        var hourStr: String!
+        var minuteStr: String!
+        
+        hourStr = seconds/3600 < 10 ? "0\(seconds/3600)" : "\(seconds/3600)"
+        minuteStr = seconds%3600/60 < 10 ? "0\(seconds%3600/60)" : "\(seconds%3600/60)"
+        return "\(hourStr):\(minuteStr)"
+    }
+    
+    class func loadImage(imageView: UIImageView, imageUrl: String) {
+        if let url: NSURL = NSURL(string: imageUrl)! {
+            getDataFromUrl(url) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    guard let data = data where error == nil else { return }
+                    imageView.image = UIImage(data: data)
+                }
+            }
+        }
+    }
+    
+    class func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
     }
 }
 

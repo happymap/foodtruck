@@ -38,7 +38,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="distanceLable" destination="7tm-7Y-fz4" id="oDo-Wv-Meg"/>
-                <outlet property="truckImgVuew" destination="xUP-2s-Ja8" id="bRo-qQ-0ou"/>
+                <outlet property="truckImgView" destination="xUP-2s-Ja8" id="xUI-w9-dJo"/>
                 <outlet property="truckNameLabel" destination="2Rh-6O-LpA" id="hjC-Ua-OeM"/>
             </connections>
             <point key="canvasLocation" x="323.5" y="209"/>
