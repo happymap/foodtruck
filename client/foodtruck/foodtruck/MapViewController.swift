@@ -30,6 +30,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.startUpdatingLocation()
         
         mapView.delegate = self
+        
+    }
+    
+    func loadTrucks(maxLat: Double, maxLon: Double, minLat: Double, minLon: Double) {
+        // get list of trucks
+        let url = NSURL(string: Util.getEnvProperty("host") + "/truck/map?maxLat=" + String(maxLat) + "&maxLon=" + String(maxLon)
+            + "&minLat=" + String(minLat) + "&minLon=" + String(minLon) + "&day=2&time=43200")
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.refreshMap()
+            })
+        }
+        
+        task.resume()
+    
+    }
+    
+    func refreshMap() {
+        for truck in truckList as! [NSDictionary] {
+            let name = truck.valueForKey("name") as! String
+            let coord = CLLocation(latitude: truck.valueForKey("latitude") as! Double,
+                longitude: truck.valueForKey("longitude") as! Double).coordinate
+            let annotation = Annotation(title: name, locationName: "Howard St", discipline: "discipline", coordinate: coord)
+            self.mapView.addAnnotation(annotation)
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -39,8 +68,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let region = MKCoordinateRegion(center: coord, span: span)
         mapView.setRegion(region, animated: false)
         
-        let annotation = Annotation(title: "Japa Curry", locationName: "Howard St", discipline: "discipline", coordinate: coord)
-        mapView.addAnnotation(annotation)
+        // load trucks
+        let northEast = mapView.convertPoint(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFromView: mapView)
+        let southWest = mapView.convertPoint(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFromView: mapView)
+        
+        loadTrucks(northEast.latitude, maxLon: northEast.longitude, minLat: southWest.latitude, minLon: southWest.longitude)
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
