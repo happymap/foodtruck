@@ -56,6 +56,7 @@
                         <outlet property="addressBtn" destination="gPZ-Py-0Px" id="yQK-O5-EtJ"/>
                         <outlet property="doneBtn" destination="m3i-L8-qZ7" id="VM5-11-evi"/>
                         <outlet property="hoursLbl" destination="cTj-ki-pMw" id="4yP-8h-bwQ"/>
+                        <outlet property="mapView" destination="zfh-eY-Qvq" id="noM-Yn-45U"/>
                         <outlet property="nameLbl" destination="Iuq-p7-pge" id="vgc-78-HRv"/>
                         <outlet property="truckImg" destination="1C8-xA-Z6y" id="MUI-gC-goB"/>
                     </connections>
