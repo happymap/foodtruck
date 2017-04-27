@@ -13,11 +13,13 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var searchBtn: UIButton!
     
     let locationManager = CLLocationManager()
 
     var truckList:[AnyObject] = []
+    var isInitialLoad = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func refreshMap() {
+        // remove all annotations
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        
+        // add annotations
         for truck in truckList as! [NSDictionary] {
             let name = truck.valueForKey("name") as! String
             let coord = CLLocation(latitude: truck.valueForKey("latitude") as! Double,
@@ -68,11 +75,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let region = MKCoordinateRegion(center: coord, span: span)
         mapView.setRegion(region, animated: false)
         
-        // load trucks
-        let northEast = mapView.convertPoint(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFromView: mapView)
-        let southWest = mapView.convertPoint(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFromView: mapView)
-        
-        loadTrucks(northEast.latitude, maxLon: northEast.longitude, minLat: southWest.latitude, minLon: southWest.longitude)
+        if (isInitialLoad) {
+            search()
+        } else {
+            isInitialLoad = false
+        }
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -95,6 +102,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         task.resume()
+    }
+    
+    @IBAction func search() {
+        // get map bounds
+        let northEast = mapView.convertPoint(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFromView: mapView)
+        let southWest = mapView.convertPoint(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFromView: mapView)
+        
+        // fetch trucks in the visible map area
+        loadTrucks(northEast.latitude, maxLon: northEast.longitude, minLat: southWest.latitude, minLon: southWest.longitude)
+
+        // refresh the map
+        refreshMap()
     }
 }
 

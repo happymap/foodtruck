@@ -91,7 +91,7 @@
                     <navigationItem key="navigationItem" id="UMq-2m-VnJ">
                         <barButtonItem key="rightBarButtonItem" title="Map" style="plain" id="xGc-Ri-JMf">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="voP-Cs-W1d">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <rect key="frame" x="329" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Map"/>
                                 <connections>
@@ -121,12 +121,25 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SdG-7S-WWz">
                                 <rect key="frame" x="-5" y="64" width="380" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjt-m1-Kj2">
+                                <rect key="frame" x="73" y="603" width="228" height="44"/>
+                                <color key="backgroundColor" red="0.7455263617318435" green="0.7455263617318435" blue="0.7455263617318435" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Redo search in this area"/>
+                                <connections>
+                                    <action selector="search" destination="gkt-Gj-Vwq" eventType="touchUpInside" id="VRE-mk-HcS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapView" destination="SdG-7S-WWz" id="RGY-Fw-4k4"/>
+                        <outlet property="searchBtn" destination="Bjt-m1-Kj2" id="cC9-2O-FLF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJk-nf-hv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
