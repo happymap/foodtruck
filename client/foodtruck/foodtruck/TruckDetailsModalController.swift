@@ -48,7 +48,7 @@ public class TruckDetailsModalController: UIViewController {
         let region = MKCoordinateRegion(center: coord, span: span)
         mapView.setRegion(region, animated: false)
         
-        let annotation = Annotation(title: "Japa Curry", locationName: "Howard St", discipline: "discipline", coordinate: coord)
+        let annotation = Annotation(title: "Japa Curry", identifier: details.valueForKey("truck_id") as! Int, coordinate: coord)
         mapView.addAnnotation(annotation)
     }
 }

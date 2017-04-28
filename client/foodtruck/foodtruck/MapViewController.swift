@@ -63,7 +63,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let name = truck.valueForKey("name") as! String
             let coord = CLLocation(latitude: truck.valueForKey("latitude") as! Double,
                 longitude: truck.valueForKey("longitude") as! Double).coordinate
-            let annotation = Annotation(title: name, locationName: "Howard St", discipline: "discipline", coordinate: coord)
+            let annotation = Annotation(title: name, identifier: truck.valueForKey("truck_id") as! Int, coordinate: coord)
             self.mapView.addAnnotation(annotation)
         }
     }
@@ -103,6 +103,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         task.resume()
     }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = (annotation as! Annotation).identifier
+        
+        if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(String(identifier)) {
+            annotationView.annotation = annotation
+            return annotationView
+        } else {
+            let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:String(identifier))
+            annotationView.enabled = true
+            annotationView.canShowCallout = true
+            
+            let btn = UIButton(type: .DetailDisclosure)
+            annotationView.rightCalloutAccessoryView = btn
+            btn.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+            return annotationView
+        }
+    }
+    
+    func buttonClicked(sender: AnyObject?) {
+        sender.
+    
+    }
+
     
     @IBAction func search() {
         // get map bounds
