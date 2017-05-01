@@ -118,13 +118,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let btn = UIButton(type: .DetailDisclosure)
             annotationView.rightCalloutAccessoryView = btn
             btn.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+            btn.tag = identifier
             return annotationView
         }
     }
     
     func buttonClicked(sender: AnyObject?) {
-        sender.
-    
+        let truck_id = sender?.tag
+        
+        for truck in truckList as! [NSDictionary] {
+            if (truck.valueForKey("truck_id") as? Int == truck_id) {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails") as! TruckDetailsModalController
+                self.presentViewController(modalViewController, animated: true, completion: nil)
+                modalViewController.assignDetails(truck)
+            }
+        }
     }
 
     
