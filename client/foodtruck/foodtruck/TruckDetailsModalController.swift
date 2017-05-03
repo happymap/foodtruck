@@ -28,6 +28,16 @@ public class TruckDetailsModalController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func navigate(sender: UIButton) {
+        // open apple maps for directions
+        let latitude = details .valueForKey("latitude") as! Double
+        let longitude = details .valueForKey("longitude") as! Double
+        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+        mapItem.name = "Destination/Target Address or Name"
+        mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
+    }
+    
     public func assignDetails(details: NSDictionary) {
         self.details = details
         self.nameLbl.text = (self.details.valueForKey("name") as! String)

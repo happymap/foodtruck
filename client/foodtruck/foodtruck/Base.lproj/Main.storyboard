@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CbB-9t-4hA">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CbB-9t-4hA">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
@@ -23,31 +23,35 @@
                                     <action selector="done:" destination="xW7-Jf-HWY" eventType="touchUpInside" id="fqs-0V-IWt"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuq-p7-pge">
-                                <rect key="frame" x="20" y="306" width="223" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iuq-p7-pge">
+                                <rect key="frame" x="76" y="306" width="223" height="34"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1C8-xA-Z6y">
                                 <rect key="frame" x="0.0" y="66" width="375" height="230"/>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zfh-eY-Qvq">
-                                <rect key="frame" x="0.0" y="430" width="375" height="237"/>
+                                <rect key="frame" x="0.0" y="408" width="375" height="259"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTj-ki-pMw">
-                                <rect key="frame" x="20" y="348" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPZ-Py-0Px">
-                                <rect key="frame" x="0.0" y="402" width="375" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPZ-Py-0Px">
+                                <rect key="frame" x="0.0" y="377" width="375" height="32"/>
+                                <color key="backgroundColor" red="0.95465728591160226" green="0.95465728591160226" blue="0.95465728591160226" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Button">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="navigate:" destination="xW7-Jf-HWY" eventType="touchUpInside" id="N4o-VX-bCu"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTj-ki-pMw">
+                                <rect key="frame" x="43" y="344" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -65,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="702.5" y="-517.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Nearby Trucks-->
         <scene sceneID="vHq-WO-4W0">
             <objects>
                 <tableViewController id="BCi-7I-8NL" customClass="ViewController" customModule="foodtruck" customModuleProvider="target" sceneMemberID="viewController">
@@ -88,7 +92,7 @@
                             <outlet property="delegate" destination="BCi-7I-8NL" id="Gew-vr-giM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="UMq-2m-VnJ">
+                    <navigationItem key="navigationItem" title="Nearby Trucks" id="UMq-2m-VnJ">
                         <barButtonItem key="rightBarButtonItem" title="Map" style="plain" id="xGc-Ri-JMf">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="voP-Cs-W1d">
                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
@@ -118,12 +122,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SdG-7S-WWz">
-                                <rect key="frame" x="-5" y="64" width="380" height="603"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SdG-7S-WWz">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjt-m1-Kj2">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjt-m1-Kj2">
                                 <rect key="frame" x="73" y="603" width="228" height="44"/>
                                 <color key="backgroundColor" red="0.7455263617318435" green="0.7455263617318435" blue="0.7455263617318435" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="228" id="D0C-yU-9ho"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Redo search in this area"/>
@@ -133,6 +140,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SdG-7S-WWz" firstAttribute="leading" secondItem="6pF-n2-1FT" secondAttribute="leading" id="IXa-BX-lak"/>
+                            <constraint firstItem="SdG-7S-WWz" firstAttribute="bottom" secondItem="oCj-Ax-w4T" secondAttribute="top" id="YR8-te-Pev"/>
+                            <constraint firstItem="SdG-7S-WWz" firstAttribute="centerX" secondItem="Bjt-m1-Kj2" secondAttribute="centerX" id="goc-60-jB3"/>
+                            <constraint firstItem="SdG-7S-WWz" firstAttribute="top" secondItem="JRf-1E-kZg" secondAttribute="bottom" id="nBH-zr-2wH"/>
+                            <constraint firstAttribute="bottom" secondItem="Bjt-m1-Kj2" secondAttribute="bottom" constant="20" symbolic="YES" id="nIA-2f-MQZ"/>
+                            <constraint firstAttribute="trailing" secondItem="SdG-7S-WWz" secondAttribute="trailing" id="o2L-eo-zPJ"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
