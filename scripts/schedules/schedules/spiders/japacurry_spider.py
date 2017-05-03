@@ -1,5 +1,6 @@
 import scrapy
 import pytz
+import utility
 
 from schedules.items import SchedulesItem
 
@@ -44,6 +45,10 @@ class JapaCurrySpider(scrapy.Spider):
 				item['city'] = city
 				item['state'] = state
 				item['day'] = day_num
+
+				coordinates = utility.get_coordinate_by_address(address)
+				item['latitude'] = coordinates[0]
+				item['longitude'] = coordinates[1]
 
 				yield item
 

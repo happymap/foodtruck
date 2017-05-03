@@ -1,5 +1,6 @@
 import scrapy
 import pytz
+import utility
 
 from schedules.items import SchedulesItem
 
@@ -31,8 +32,13 @@ class SenorSisigSpider(scrapy.Spider):
 			timeInSeconds = self.get_start_and_end_time(times[0], times[1])
 			item['start_time'] = timeInSeconds[0]
 			item['end_time'] = timeInSeconds[1]
-			item['city'] = "San Francisco"
+			item['city'] = address.split(",")[1].strip()
 			item['state'] = "CA"
+			item['zip'] = address.split(",")[2].strip().split(" ")[1]
+
+			coordinates = utility.get_coordinate_by_address(address)
+			item['latitude'] = coordinates[0]
+			item['longitude'] = coordinates[1]
 
 			yield item 
 
