@@ -3,39 +3,49 @@ import pytz
 
 from schedules.items import SchedulesItem
 
+DAYS_MAP = {
+	"mon": 0,
+	"tue": 1,
+	"wed": 2,
+	"thu": 3,
+	"fri": 4,
+	"sat": 5,
+	"sun": 6
+}
+
 class SenorSisigSpider(scrapy.Spider):
 	name = "senorsisig"
 	start_urls = ["http://www.senorsisig.com"];
 
 	def parse(self, response):
-
 		for schedule in response.xpath('//div[@id="loc-wrap"]/section[contains(@data-wcal-date, "2017")]'):
+			day_str = schedule.xpath('div[@class="row map-row"]/div[@class="span2 date"]/text()').extract()[0].strip().lower()
+
+			if not day_str:
+				continue
 			address = schedule.xpath('div[@class="row map-row"]/div[@class="span4 location"]/a/@data-ext-map-link').extract()[0]
-			day_str = schedule.xpath('div[@class="row map-row"]/div[@class="span2 date"]/text()').extract()[0].trim()
-			print day_str
+			times = schedule.xpath('div[@class="row map-row"]/div[@class="span1 time"]/span/text()').extract()
+			item = SchedulesItem()
+			item['day'] = DAYS_MAP[day_str]
+			item['address'] = address
+			timeInSeconds = self.get_start_and_end_time(times[0], times[1])
+			item['start_time'] = timeInSeconds[0]
+			item['end_time'] = timeInSeconds[1]
+			item['city'] = "San Francisco"
+			item['state'] = "CA"
 
-			# day = schedule.xpath('dt[@class="date"]/span[@class="day"]/text()').extract()[0]
-			# times = schedule.xpath('dd[@class="time"]/text()').extract()[0]
-			# times = times.split(time_delimiter)
-			# address = schedule.xpath('dd[@class="place"]/text()').extract()[0]
-			# city = "San Francisco"
-			# state = "CA"
+			yield item 
 
-			# item = SchedulesItem()
+	def get_start_and_end_time(self, start_time_str, end_time_str):
+		start_times = start_time_str.split(" ")
+		end_times = end_time_str.split(" ")
+		return [self.time_in_seconds(start_times[0], start_times[1]), self.time_in_seconds(end_times[0], end_times[1])]
 
-			# if (times and len(times) == 2):
-			# 	day_num = DAYS_MAP[day.lower()]
-			# 	start_time_str = times[0].strip()
-			# 	end_time_str = times[1].strip()
+	def time_in_seconds(self, time, amOrPm):
+		hour = int(time.split(":")[0])
+		minute = int(time.split(":")[1])
+		if amOrPm == "pm":
+			hour += 12
+		return hour * 3600 + minute * 60
 
-			# 	# if start_time is after the end_time, means time is in 12-hour format
-			# 	times_pair = self.time_in_seconds(start_time_str, end_time_str)
 
-			# 	item['start_time'] = times_pair[0]
-			# 	item['end_time'] = times_pair[1]
-			# 	item['address'] = address
-			# 	item['city'] = city
-			# 	item['state'] = state
-			# 	item['day'] = day_num
-
-			# 	yield item
