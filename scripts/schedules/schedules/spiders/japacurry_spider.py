@@ -3,6 +3,7 @@ import pytz
 import utility
 
 from schedules.items import SchedulesItem
+from DBUtil import *
 
 DAYS_MAP = {
 	"monday": 0,
@@ -41,14 +42,20 @@ class JapaCurrySpider(scrapy.Spider):
 
 				item['start_time'] = times_pair[0]
 				item['end_time'] = times_pair[1]
-				item['address'] = address
+				item['address'] = address + ", " + city + ", " + state
 				item['city'] = city
 				item['state'] = state
 				item['day'] = day_num
 
 				coordinates = utility.get_coordinate_by_address(address)
-				item['latitude'] = coordinates[0]
-				item['longitude'] = coordinates[1]
+				item['latitude'] = coordinates['latitude']
+				item['longitude'] = coordinates['longitude']
+				item['truck_id'] = 1
+				item['zip'] = coordinates['zip']
+				item['address'] += " " + item['zip']
+
+				schedule = utility.convert_to_pojo(item)
+				schedule.save()
 
 				yield item
 

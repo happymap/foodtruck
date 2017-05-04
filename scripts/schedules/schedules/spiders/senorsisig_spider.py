@@ -3,6 +3,7 @@ import pytz
 import utility
 
 from schedules.items import SchedulesItem
+from DBUtil import *
 
 DAYS_MAP = {
 	"mon": 0,
@@ -37,8 +38,12 @@ class SenorSisigSpider(scrapy.Spider):
 			item['zip'] = address.split(",")[2].strip().split(" ")[1]
 
 			coordinates = utility.get_coordinate_by_address(address)
-			item['latitude'] = coordinates[0]
-			item['longitude'] = coordinates[1]
+			item['latitude'] = coordinates['latitude']
+			item['longitude'] = coordinates['longitude']
+			item['truck_id'] = 2
+
+			schedule = utility.convert_to_pojo(item)
+			schedule.save()
 
 			yield item 
 
