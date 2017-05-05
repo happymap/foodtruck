@@ -5,8 +5,8 @@ var Module = function() {
 };
 
 var nearbyTrucksQuery = function(lat, lng, distance, day, time) {
-	return "SELECT truck.truck_id, schedule.display_address, truck.name, truck.description, truck.logo, schedule.start_time, schedule.end_time, "
-+ "schedule.latitude, schedule.longitude, "
+	return "SELECT truck.truck_id, schedule.schedule_id, schedule.address, truck.name, truck.description, truck.logo, schedule.start_time, schedule.end_time, "
++ "schedule.latitude, schedule.longitude, truck.image, "
 + "SQRT(POW(69.1 * (latitude - " + lat + "), 2) "
 + "+ POW(69.1 * (" + lng + " - longitude) * COS(latitude / 57.3), 2)) AS "
 + "distance "
@@ -20,8 +20,8 @@ var nearbyTrucksQuery = function(lat, lng, distance, day, time) {
 };
 
 var mapTrucksQuery = function(maxLat, minLat, maxLon, minLon, day, time) {
-	return "SELECT truck.truck_id, schedule.display_address, truck.name, truck.description, truck.logo, schedule.start_time, schedule.end_time, "
-+ "schedule.latitude, schedule.longitude "
+	return "SELECT truck.truck_id, schedule.schedule_id, schedule.address, truck.name, truck.description, truck.logo, schedule.start_time, schedule.end_time, "
++ "schedule.latitude, schedule.longitude, truck.image "
 + "FROM schedule "
 + "JOIN truck ON schedule.truck_id = truck.truck_id "
 + "WHERE day = " + day + " "

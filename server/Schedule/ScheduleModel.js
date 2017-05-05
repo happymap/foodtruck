@@ -48,10 +48,6 @@ var scheduleSchema = {
 	truckId: {
 		type: Sequelize.BIGINT,
 		field: 'truck_id'
-	},
-	displayAddress: {
-		type: Sequelize.STRING,
-		field: 'display_address'
 	}
 };
 

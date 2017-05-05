@@ -63,7 +63,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let name = truck.valueForKey("name") as! String
             let coord = CLLocation(latitude: truck.valueForKey("latitude") as! Double,
                 longitude: truck.valueForKey("longitude") as! Double).coordinate
-            let annotation = Annotation(title: name, identifier: truck.valueForKey("truck_id") as! Int, coordinate: coord)
+            let annotation = Annotation(title: name, identifier: truck.valueForKey("schedule_id") as! Int, coordinate: coord)
             self.mapView.addAnnotation(annotation)
         }
     }
@@ -124,10 +124,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func buttonClicked(sender: AnyObject?) {
-        let truck_id = sender?.tag
+        let schedule_id = sender?.tag
         
         for truck in truckList as! [NSDictionary] {
-            if (truck.valueForKey("truck_id") as? Int == truck_id) {
+            if (truck.valueForKey("schedule_id") as? Int == schedule_id) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails") as! TruckDetailsModalController
                 self.presentViewController(modalViewController, animated: true, completion: nil)

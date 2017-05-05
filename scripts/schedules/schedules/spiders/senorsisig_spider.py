@@ -20,32 +20,42 @@ class SenorSisigSpider(scrapy.Spider):
 	start_urls = ["http://www.senorsisig.com"];
 
 	def parse(self, response):
-		for schedule in response.xpath('//div[@id="loc-wrap"]/section[contains(@data-wcal-date, "2017")]'):
-			day_str = schedule.xpath('div[@class="row map-row"]/div[@class="span2 date"]/text()').extract()[0].strip().lower()
 
-			if not day_str:
-				continue
-			address = schedule.xpath('div[@class="row map-row"]/div[@class="span4 location"]/a/@data-ext-map-link').extract()[0]
-			times = schedule.xpath('div[@class="row map-row"]/div[@class="span1 time"]/span/text()').extract()
-			item = SchedulesItem()
-			item['day'] = DAYS_MAP[day_str]
-			item['address'] = address
-			timeInSeconds = self.get_start_and_end_time(times[0], times[1])
-			item['start_time'] = timeInSeconds[0]
-			item['end_time'] = timeInSeconds[1]
-			item['city'] = address.split(",")[1].strip()
-			item['state'] = "CA"
-			item['zip'] = address.split(",")[2].strip().split(" ")[1]
+		# transaction begins
+		get_db().begin()
+		try:
+			Schedule.delete().where(Schedule.truck_id == 2).execute()
 
-			coordinates = utility.get_coordinate_by_address(address)
-			item['latitude'] = coordinates['latitude']
-			item['longitude'] = coordinates['longitude']
-			item['truck_id'] = 2
+			for schedule in response.xpath('//div[@id="loc-wrap"]/section[contains(@data-wcal-date, "2017")]'):
+				day_str = schedule.xpath('div[@class="row map-row"]/div[@class="span2 date"]/text()').extract()[0].strip().lower()
 
-			schedule = utility.convert_to_pojo(item)
-			schedule.save()
+				if not day_str:
+					continue
+				address = schedule.xpath('div[@class="row map-row"]/div[@class="span4 location"]/a/@data-ext-map-link').extract()[0]
+				times = schedule.xpath('div[@class="row map-row"]/div[@class="span1 time"]/span/text()').extract()
+				item = SchedulesItem()
+				item['day'] = DAYS_MAP[day_str]
+				item['address'] = address
+				timeInSeconds = self.get_start_and_end_time(times[0], times[1])
+				item['start_time'] = timeInSeconds[0]
+				item['end_time'] = timeInSeconds[1]
 
-			yield item 
+				addrItems = address.split(",")
+				item['city'] = addrItems[len(addrItems) - 2].strip()
+				item['state'] = "CA"
+				item['zip'] = addrItems[len(addrItems) - 1].strip().split()[1]
+
+				coordinates = utility.get_coordinate_by_address(address)
+				item['latitude'] = coordinates['latitude']
+				item['longitude'] = coordinates['longitude']
+				item['truck_id'] = 2
+
+				schedule = utility.convert_to_pojo(item)
+				schedule.save()
+
+		except:
+			get_db().rollback()
+		get_db().commit()
 
 	def get_start_and_end_time(self, start_time_str, end_time_str):
 		start_times = start_time_str.split(" ")

@@ -45,10 +45,10 @@ public class TruckDetailsModalController: UIViewController {
         let endTime = Util.convertToHours(self.details.valueForKey("end_time") as! Int)
         self.hoursLbl.text = "Hours Today: \(startTime) - \(endTime)"
         
-        let truckImageUrl = "http://japacurry.com/wordpress/wp-content/uploads/2015/05/japacurry_truck.jpg"
+        let truckImageUrl = self.details.valueForKey("image") as! String
         Util.loadImage(self.truckImg, imageUrl: truckImageUrl)
         
-        self.addressBtn.setTitle((self.details.valueForKey("display_address") as! String), forState: .Normal)
+        self.addressBtn.setTitle((self.details.valueForKey("address") as! String), forState: .Normal)
         
         // mark the place on the map
         let coord = CLLocation(latitude: details.valueForKey("latitude") as! Double,

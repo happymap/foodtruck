@@ -105,6 +105,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="kO4-8a-ouB">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0f-Ih-kTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

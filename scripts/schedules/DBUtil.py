@@ -28,3 +28,6 @@ class Schedule(MySQLModel):
 
 # when you're ready to start querying, remember to connect
 myDB.connect()
+
+def get_db():
+	return myDB

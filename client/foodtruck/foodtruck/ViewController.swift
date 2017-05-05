@@ -21,6 +21,9 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set handler for table refresh
+        self.refreshControl!.addTarget(self, action:"handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
         // get location
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -91,6 +94,14 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         task.resume()
+    }
+    
+    func handleRefresh(sender: AnyObject?) {
+        self.refreshTable()
+        
+        if self.refreshControl!.refreshing {
+            self.refreshControl!.endRefreshing()
+        }
     }
 }
 

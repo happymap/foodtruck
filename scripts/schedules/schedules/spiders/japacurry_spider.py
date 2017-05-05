@@ -22,43 +22,48 @@ class JapaCurrySpider(scrapy.Spider):
 	def parse(self, response):
 		time_delimiter = "-"
 
-		for schedule in response.xpath('//dl[@class="schedule-grid"]'):
-			day = schedule.xpath('dt[@class="date"]/span[@class="day"]/text()').extract()[0]
-			times = schedule.xpath('dd[@class="time"]/text()').extract()[0]
-			times = times.split(time_delimiter)
-			address = schedule.xpath('dd[@class="place"]/text()').extract()[0]
-			city = "San Francisco"
-			state = "CA"
+		# transaction begins
+		get_db().begin()
 
-			item = SchedulesItem()
+		try:
+			Schedule.delete().where(Schedule.truck_id == 1).execute()	
+			for schedule in response.xpath('//dl[@class="schedule-grid"]'):
+				day = schedule.xpath('dt[@class="date"]/span[@class="day"]/text()').extract()[0]
+				times = schedule.xpath('dd[@class="time"]/text()').extract()[0]
+				times = times.split(time_delimiter)
+				address = schedule.xpath('dd[@class="place"]/text()').extract()[0]
+				city = "San Francisco"
+				state = "CA"
 
-			if (times and len(times) == 2):
-				day_num = DAYS_MAP[day.lower()]
-				start_time_str = times[0].strip()
-				end_time_str = times[1].strip()
+				item = SchedulesItem()
 
-				# if start_time is after the end_time, means time is in 12-hour format
-				times_pair = self.time_in_seconds(start_time_str, end_time_str)
+				if (times and len(times) == 2):
+					day_num = DAYS_MAP[day.lower()]
+					start_time_str = times[0].strip()
+					end_time_str = times[1].strip()
 
-				item['start_time'] = times_pair[0]
-				item['end_time'] = times_pair[1]
-				item['address'] = address + ", " + city + ", " + state
-				item['city'] = city
-				item['state'] = state
-				item['day'] = day_num
+					# if start_time is after the end_time, means time is in 12-hour format
+					times_pair = self.time_in_seconds(start_time_str, end_time_str)
 
-				coordinates = utility.get_coordinate_by_address(address)
-				item['latitude'] = coordinates['latitude']
-				item['longitude'] = coordinates['longitude']
-				item['truck_id'] = 1
-				item['zip'] = coordinates['zip']
-				item['address'] += " " + item['zip']
+					item['start_time'] = times_pair[0]
+					item['end_time'] = times_pair[1]
+					item['address'] = address + ", " + city + ", " + state
+					item['city'] = city
+					item['state'] = state
+					item['day'] = day_num
 
-				schedule = utility.convert_to_pojo(item)
-				schedule.save()
+					coordinates = utility.get_coordinate_by_address(address)
+					item['latitude'] = coordinates['latitude']
+					item['longitude'] = coordinates['longitude']
+					item['truck_id'] = 1
+					item['zip'] = coordinates['zip']
+					item['address'] += " " + item['zip']
 
-				yield item
-
+					schedule = utility.convert_to_pojo(item)
+					schedule.save()
+		except:
+			get_db().rollback()
+		get_db().commit()
 
 	def time_in_seconds(self, start_time_str, end_time_str):
 		start_times = start_time_str.split(":")
