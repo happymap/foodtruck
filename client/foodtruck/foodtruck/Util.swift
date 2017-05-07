@@ -11,17 +11,24 @@ import UIKit
 
 class Util {
     
-    static let dict = NSDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("environment", ofType: "plist")!)
+    static let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "environment", ofType: "plist")!)
     
-    class func getEnvProperty(key: String) -> String {
-        return dict!.objectForKey(key) as! String
+    enum DeivceType {
+        case iPhone5
+        case iPhone6
+        case iPhone6Plus
+    }
+    
+    
+    class func getEnvProperty(_ key: String) -> String {
+        return dict!.object(forKey: key) as! String
     }
     
     // convert string to json object
-    class func JSONParseArray(string: String) -> [AnyObject]{
-        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
+    class func JSONParseArray(_ string: String) -> [AnyObject]{
+        if let data = string.data(using: String.Encoding.utf8) {
             do {
-                if let array = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [AnyObject] {
+                if let array = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [AnyObject] {
                     return array
                 }
             } catch {
@@ -31,30 +38,60 @@ class Util {
         return [AnyObject]()
     }
     
-    class func convertToHours(seconds: Int) -> String {
+    class func convertToHours(_ seconds: Int) -> String {
         var hourStr: String!
         var minuteStr: String!
         
         hourStr = seconds/3600 < 10 ? "0\(seconds/3600)" : "\(seconds/3600)"
         minuteStr = seconds%3600/60 < 10 ? "0\(seconds%3600/60)" : "\(seconds%3600/60)"
-        return "\(hourStr):\(minuteStr)"
+        return "\(hourStr!):\(minuteStr!)"
     }
     
-    class func loadImage(imageView: UIImageView, imageUrl: String) {
-        if let url: NSURL = NSURL(string: imageUrl)! {
+    class func loadImage(_ imageView: UIImageView, imageUrl: String) {
+        if let url: URL = URL(string: imageUrl) {
             getDataFromUrl(url) { (data, response, error)  in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    guard let data = data where error == nil else { return }
+                DispatchQueue.main.async { () -> Void in
+                    guard let data = data, error == nil else { return }
                     imageView.image = UIImage(data: data)
                 }
             }
         }
     }
     
-    class func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
+    class func getDataFromUrl(_ url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: NSError? ) -> Void)) {
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            completion(data, response, error as NSError?)
+            }) .resume()
+    }
+    
+    // retrieve street and city name
+    class func retrieveEssentialAddressPart(_ address:String) -> String {
+        let addressArr: [String] = address.components(separatedBy: ",")
+        let length = addressArr.count
+        var result = addressArr[0].trimmingCharacters(
+            in: CharacterSet.whitespacesAndNewlines)
+        
+        for index in 1...length-2 {
+            result += ", \(addressArr[index])"
+        }
+        
+        return result
+    }
+    
+    class func getDeviceType() -> DeivceType {
+        let screenSize = UIScreen.main.bounds.size
+        let height = max(screenSize.width, screenSize.height)
+        
+        switch height {
+        case 568:
+            return .iPhone5
+        case 667:
+            return .iPhone6
+        case 736:
+            return .iPhone6Plus
+        default:
+            return .iPhone6
+        }
     }
 }
 

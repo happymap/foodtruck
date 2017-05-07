@@ -35,22 +35,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    func loadTrucks(maxLat: Double, maxLon: Double, minLat: Double, minLon: Double) {
+    func loadTrucks(_ maxLat: Double, maxLon: Double, minLat: Double, minLon: Double) {
         // get list of trucks
-        let url = NSURL(string: Util.getEnvProperty("host") + "/truck/map?maxLat=" + String(maxLat) + "&maxLon=" + String(maxLon)
+        let url = URL(string: Util.getEnvProperty("host") + "/truck/map?maxLat=" + String(maxLat) + "&maxLon=" + String(maxLon)
             + "&minLat=" + String(minLat) + "&minLon=" + String(minLon) + "&day=2&time=43200")
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+        let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
+            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
+            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue)! as String)
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.refreshMap()
             })
-        }
+        }) 
         
         task.resume()
-    
     }
     
     func refreshMap() {
@@ -60,15 +59,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // add annotations
         for truck in truckList as! [NSDictionary] {
-            let name = truck.valueForKey("name") as! String
-            let coord = CLLocation(latitude: truck.valueForKey("latitude") as! Double,
-                longitude: truck.valueForKey("longitude") as! Double).coordinate
-            let annotation = Annotation(title: name, identifier: truck.valueForKey("schedule_id") as! Int, coordinate: coord)
+            let name = truck.value(forKey: "name") as! String
+            let coord = CLLocation(latitude: truck.value(forKey: "latitude") as! Double,
+                longitude: truck.value(forKey: "longitude") as! Double).coordinate
+            let annotation = Annotation(title: name, identifier: truck.value(forKey: "schedule_id") as! Int, coordinate: coord)
             self.mapView.addAnnotation(annotation)
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coord = ((locations as NSArray).lastObject as! CLLocation).coordinate
 
         let span = MKCoordinateSpanMake(0.075, 0.075)
@@ -82,55 +81,55 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let leftTopPoint = CGPointMake(mapView.bounds.origin.x, mapView.bounds.origin.y)
-        let rightBottomPoint = CGPointMake(mapView.bounds.origin.x + mapView.bounds.width, mapView.bounds.origin.y + mapView.bounds.height)
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let leftTopPoint = CGPoint(x: mapView.bounds.origin.x, y: mapView.bounds.origin.y)
+        let rightBottomPoint = CGPoint(x: mapView.bounds.origin.x + mapView.bounds.width, y: mapView.bounds.origin.y + mapView.bounds.height)
         
-        let leftTopCoord = mapView.convertPoint(leftTopPoint, toCoordinateFromView: mapView)
-        let rightBottomCoord = mapView.convertPoint(rightBottomPoint, toCoordinateFromView: mapView)
+        let leftTopCoord = mapView.convert(leftTopPoint, toCoordinateFrom: mapView)
+        let rightBottomCoord = mapView.convert(rightBottomPoint, toCoordinateFrom: mapView)
         
         // get list of trucks
         let host = Util.getEnvProperty("host")
         let strUrl = "\(host)/truck/map?maxLat=\(leftTopCoord.latitude)&minLon=\(leftTopCoord.longitude)&minLat=\(rightBottomCoord.latitude)&maxLon=\(rightBottomCoord.longitude)&day=2&time=43200"
-        let url = NSURL(string: strUrl)
+        let url = URL(string: strUrl)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:NSUTF8StringEncoding) as! String)
+        let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
+            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue)! as String)
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
             })
-        }
+        }) 
         
         task.resume()
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = (annotation as! Annotation).identifier
         
-        if let annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(String(identifier)) {
+        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(identifier)) {
             annotationView.annotation = annotation
             return annotationView
         } else {
             let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:String(identifier))
-            annotationView.enabled = true
+            annotationView.isEnabled = true
             annotationView.canShowCallout = true
             
-            let btn = UIButton(type: .DetailDisclosure)
+            let btn = UIButton(type: .detailDisclosure)
             annotationView.rightCalloutAccessoryView = btn
-            btn.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+            btn.addTarget(self, action: #selector(MapViewController.buttonClicked(_:)), for: .touchUpInside)
             btn.tag = identifier
             return annotationView
         }
     }
     
-    func buttonClicked(sender: AnyObject?) {
+    func buttonClicked(_ sender: AnyObject?) {
         let schedule_id = sender?.tag
         
         for truck in truckList as! [NSDictionary] {
-            if (truck.valueForKey("schedule_id") as? Int == schedule_id) {
+            if (truck.value(forKey: "schedule_id") as? Int == schedule_id) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let modalViewController = storyboard.instantiateViewControllerWithIdentifier("TruckDetails") as! TruckDetailsModalController
-                self.presentViewController(modalViewController, animated: true, completion: nil)
+                let modalViewController = storyboard.instantiateViewController(withIdentifier: "TruckDetails") as! TruckDetailsModalController
+                self.present(modalViewController, animated: true, completion: nil)
                 modalViewController.assignDetails(truck)
             }
         }
@@ -139,8 +138,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBAction func search() {
         // get map bounds
-        let northEast = mapView.convertPoint(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFromView: mapView)
-        let southWest = mapView.convertPoint(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFromView: mapView)
+        let northEast = mapView.convert(CGPoint(x: mapView.bounds.width, y: 0), toCoordinateFrom: mapView)
+        let southWest = mapView.convert(CGPoint(x: 0, y: mapView.bounds.height), toCoordinateFrom: mapView)
         
         // fetch trucks in the visible map area
         loadTrucks(northEast.latitude, maxLon: northEast.longitude, minLat: southWest.latitude, minLon: southWest.longitude)
