@@ -13,10 +13,11 @@ Module.prototype.getTrucks = function(req, res, next) {
 	var lon = req.query.lon;
 	var lat = req.query.lat;
 	var day = req.query.day;
-	var time = req.query.time;
+	// var time = req.query.time;
+	var time = 0;
 
 	// validate params
-	if (!(lon && lat && day && time)) {
+	if (!(lon && lat && day)) {
 		res.sendStatus(400);
 		return;
 	}
@@ -47,7 +48,8 @@ Module.prototype.getTruckByRange = function(req, res, next) {
 	var maxLon = req.query.maxLon;
 	var minLon = req.query.minLon;
 	var day = req.query.day;
-	var time = req.query.time;
+	// var time = req.query.time;
+	var time = 0;
 
 	TruckPersistence.getTruckByRange(maxLat, minLat, maxLon, minLon, day, time, function(trucks) {
 		if (trucks) {

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZaO-GA-Co4" id="cj5-8E-6jW">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="69.666666666666671"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUP-2s-Ja8">
@@ -54,10 +54,18 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9T-3m-IgM">
+                        <rect key="frame" x="333" y="48.666666666666657" width="31" height="14.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qaY-Fw-5AL" firstAttribute="leading" secondItem="7tm-7Y-fz4" secondAttribute="trailing" constant="2" id="3mZ-94-o6u"/>
                     <constraint firstAttribute="bottomMargin" secondItem="7tm-7Y-fz4" secondAttribute="bottom" constant="32" id="6jW-IA-fzV"/>
+                    <constraint firstAttribute="bottom" secondItem="Q9T-3m-IgM" secondAttribute="bottom" constant="4" id="FQJ-Yp-baE"/>
+                    <constraint firstAttribute="trailing" secondItem="Q9T-3m-IgM" secondAttribute="trailing" constant="11" id="QPm-83-87F"/>
                     <constraint firstItem="qaY-Fw-5AL" firstAttribute="trailing" secondItem="cj5-8E-6jW" secondAttribute="trailingMargin" id="jZF-AQ-CCV"/>
                     <constraint firstItem="qaY-Fw-5AL" firstAttribute="baseline" secondItem="7tm-7Y-fz4" secondAttribute="baseline" id="vwi-wN-ORc"/>
                 </constraints>
@@ -66,6 +74,7 @@
                 <outlet property="addressLabel" destination="b6h-M3-UcX" id="ZIS-Nr-0Za"/>
                 <outlet property="cuisineLabel" destination="rfe-sW-lYe" id="ddm-yS-kkN"/>
                 <outlet property="distanceLabel" destination="7tm-7Y-fz4" id="AVu-LZ-Xbx"/>
+                <outlet property="openLabel" destination="Q9T-3m-IgM" id="oSW-qv-LXS"/>
                 <outlet property="truckImgView" destination="xUP-2s-Ja8" id="xUI-w9-dJo"/>
                 <outlet property="truckNameLabel" destination="2Rh-6O-LpA" id="hjC-Ua-OeM"/>
             </connections>

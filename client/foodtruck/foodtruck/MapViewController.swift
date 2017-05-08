@@ -37,8 +37,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func loadTrucks(_ maxLat: Double, maxLon: Double, minLat: Double, minLon: Double) {
         // get list of trucks
+        let day = Util.getDayOfWeek()
         let url = URL(string: Util.getEnvProperty("host") + "/truck/map?maxLat=" + String(maxLat) + "&maxLon=" + String(maxLon)
-            + "&minLat=" + String(minLat) + "&minLon=" + String(minLon) + "&day=2&time=43200")
+            + "&minLat=" + String(minLat) + "&minLon=" + String(minLon) + "&day=\(day)")
         
         let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
             print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
@@ -81,27 +82,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let leftTopPoint = CGPoint(x: mapView.bounds.origin.x, y: mapView.bounds.origin.y)
-        let rightBottomPoint = CGPoint(x: mapView.bounds.origin.x + mapView.bounds.width, y: mapView.bounds.origin.y + mapView.bounds.height)
-        
-        let leftTopCoord = mapView.convert(leftTopPoint, toCoordinateFrom: mapView)
-        let rightBottomCoord = mapView.convert(rightBottomPoint, toCoordinateFrom: mapView)
-        
-        // get list of trucks
-        let host = Util.getEnvProperty("host")
-        let strUrl = "\(host)/truck/map?maxLat=\(leftTopCoord.latitude)&minLon=\(leftTopCoord.longitude)&minLat=\(rightBottomCoord.latitude)&maxLon=\(rightBottomCoord.longitude)&day=2&time=43200"
-        let url = URL(string: strUrl)
-        
-        let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
-            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue)! as String)
-            
-            DispatchQueue.main.async(execute: { () -> Void in
-            })
-        }) 
-        
-        task.resume()
-    }
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//        let leftTopPoint = CGPoint(x: mapView.bounds.origin.x, y: mapView.bounds.origin.y)
+//        let rightBottomPoint = CGPoint(x: mapView.bounds.origin.x + mapView.bounds.width, y: mapView.bounds.origin.y + mapView.bounds.height)
+//        
+//        let leftTopCoord = mapView.convert(leftTopPoint, toCoordinateFrom: mapView)
+//        let rightBottomCoord = mapView.convert(rightBottomPoint, toCoordinateFrom: mapView)
+//        
+//        self.loadTrucks(leftTopCoord.latitude, maxLon: rightBottomCoord.longitude, minLat: rightBottomCoord.latitude, minLon: leftTopCoord.longitude)
+//    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = (annotation as! Annotation).identifier

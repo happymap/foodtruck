@@ -34,6 +34,18 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         let nib = UINib(nibName: "truckCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "truckCell")
         
+        // add a day string to the top of nav bar
+        if let navigationBar = self.navigationController?.navigationBar {
+            let centerFrame = CGRect(x: navigationBar.frame.width/4, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height/4)
+            
+            let centerLabel = UILabel(frame: centerFrame)
+            centerLabel.textAlignment = .center
+            centerLabel.text = Util.getDayStrOfWeek()!
+            centerLabel.font = UIFont(name: "Helvetica", size: 10.0)
+            centerLabel.textColor = UIColor.lightGray
+            navigationBar.addSubview(centerLabel)
+        }
+        
         self.refreshTable()
     }
 
@@ -50,7 +62,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         let cell:truckCell = tableView.dequeueReusableCell(withIdentifier: "truckCell") as! truckCell
         let truck:NSDictionary = truckList[indexPath.row] as! NSDictionary
        
-        cell.loadItem(truck.value(forKey: "name") as! String, logoUrl: truck.value(forKey: "logo") as! String, distance: truck.value(forKey: "distance") as! Float, cuisine: truck.value(forKey: "cuisine") as! String, address: truck.value(forKey: "address") as! String)
+        let startTime = truck.value(forKey: "start_time") as! Int
+        let endTime = truck.value(forKey: "end_time") as! Int
+        let currentTimeInSeconds = Util.getSecondsOfDay()
+        
+        cell.loadItem(truck.value(forKey: "name") as! String, logoUrl: truck.value(forKey: "logo") as! String, distance: truck.value(forKey: "distance") as! Float, cuisine: truck.value(forKey: "cuisine") as! String, address: truck.value(forKey: "address") as! String, openOrClose: currentTimeInSeconds! >= startTime && currentTimeInSeconds! <= endTime)
         return cell
     }
     
@@ -80,12 +96,14 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
             return
         }
         
+        let day = Util.getDayOfWeek()
+        
         // get list of trucks
-        let url = URL(string: Util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=2&time=43200")
+        let url = URL(string: Util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=\(day)")
 
         let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
             print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
-            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue) as! String)
+            self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue)! as String)
             
             DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()
@@ -111,13 +129,16 @@ class truckCell : UITableViewCell {
     @IBOutlet var distanceLabel: UILabel!
     @IBOutlet var cuisineLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var openLabel: UILabel!
     
-    func loadItem(_ truckName: String, logoUrl: String, distance: Float, cuisine: String, address: String) {
+    func loadItem(_ truckName: String, logoUrl: String, distance: Float, cuisine: String, address: String, openOrClose: Bool) {
         truckNameLabel.text = truckName
         Util.loadImage(self.truckImgView, imageUrl: logoUrl)
         distanceLabel.text = String(format: "%.2f", distance)
         addressLabel.text = Util.retrieveEssentialAddressPart(address)
         cuisineLabel.text = cuisine
+        openLabel.text = openOrClose ? "open" : "closed"
+        openLabel.textColor = openOrClose ? UIColor.green : UIColor.red
     }
 }
 

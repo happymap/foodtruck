@@ -13,8 +13,6 @@ var nearbyTrucksQuery = function(lat, lng, distance, day, time) {
 + "FROM schedule "
 + "JOIN truck ON schedule.truck_id = truck.truck_id "
 + "WHERE day = " + day + " "
-+ "and start_time <= " + time + " "
-+ "and end_time >= " + time + " "
 + "HAVING distance < " + distance + " "
 + "ORDER  BY distance ";
 };
@@ -25,8 +23,6 @@ var mapTrucksQuery = function(maxLat, minLat, maxLon, minLon, day, time) {
 + "FROM schedule "
 + "JOIN truck ON schedule.truck_id = truck.truck_id "
 + "WHERE day = " + day + " "
-+ "and start_time <= " + time + " "
-+ "and end_time >= " + time + " "
 + "and schedule.latitude >= " + minLat + " "
 + "and schedule.latitude <= " + maxLat + " "
 + "and schedule.longitude >= " + minLon + " "

@@ -19,6 +19,7 @@ class Util {
         case iPhone6Plus
     }
     
+    static let DAY_MAP:[Int:String] = [0:"Monday", 1:"Tuesday", 2:"Wednesday", 3:"Thursday", 4:"Friday", 5:"Saturday", 6:"Sunday"]
     
     class func getEnvProperty(_ key: String) -> String {
         return dict!.object(forKey: key) as! String
@@ -92,6 +93,27 @@ class Util {
         default:
             return .iPhone6
         }
+    }
+    
+    // Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6
+    class func getDayOfWeek() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        return day - 1
+    }
+    
+    class func getDayStrOfWeek() -> String? {
+        let day = getDayOfWeek()
+        return DAY_MAP[day]
+    }
+    
+    class func getSecondsOfDay() -> Int? {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        return hour * 3600 + minute * 60
     }
 }
 
