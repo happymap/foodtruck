@@ -99,8 +99,8 @@ class Util {
     class func getDayOfWeek() -> Int {
         let date = Date()
         let calendar = Calendar.current
-        let day = calendar.component(.day, from: date)
-        return day - 1
+        let day = calendar.component(.weekday, from: date)
+        return day - 2
     }
     
     class func getDayStrOfWeek() -> String? {
