@@ -8,3 +8,9 @@ npm-debug.log
 *.pyc
 xcdebugger/
 xcuserdata/
+
+bin
+include
+lib
+local
+pip-selfcheck.json
