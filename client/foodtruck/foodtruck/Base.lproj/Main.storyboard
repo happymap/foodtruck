@@ -30,10 +30,10 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zfh-eY-Qvq">
-                                <rect key="frame" x="0.0" y="372.5" width="320" height="107.5"/>
+                                <rect key="frame" x="0.0" y="364.5" width="320" height="115.5"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPZ-Py-0Px">
-                                <rect key="frame" x="0.0" y="345.5" width="320" height="29"/>
+                                <rect key="frame" x="0.0" y="337.5" width="320" height="29"/>
                                 <color key="backgroundColor" red="0.94311344623565674" green="0.9430851936340332" blue="0.94310116767883301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Button">
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTj-ki-pMw">
-                                <rect key="frame" x="0.0" y="313.5" width="320" height="20"/>
+                                <rect key="frame" x="0.0" y="305.5" width="320" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,7 +70,6 @@
                             <constraint firstItem="zfh-eY-Qvq" firstAttribute="leading" secondItem="gPZ-Py-0Px" secondAttribute="leading" id="Jha-4D-G6Q"/>
                             <constraint firstItem="gPZ-Py-0Px" firstAttribute="top" secondItem="cTj-ki-pMw" secondAttribute="bottom" constant="12" id="LKU-Bp-XrZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="m3i-L8-qZ7" secondAttribute="trailing" constant="8" id="Lra-pQ-qkX"/>
-                            <constraint firstItem="cTj-ki-pMw" firstAttribute="top" secondItem="Iuq-p7-pge" secondAttribute="bottom" constant="18" id="OdX-eO-Rw2"/>
                             <constraint firstItem="VjX-lb-dwS" firstAttribute="leading" secondItem="i48-iN-ilH" secondAttribute="leading" id="TGU-eb-V53"/>
                             <constraint firstItem="zfh-eY-Qvq" firstAttribute="bottom" secondItem="vH4-y7-nL2" secondAttribute="top" id="ToV-V8-rof"/>
                             <constraint firstItem="cTj-ki-pMw" firstAttribute="leading" secondItem="i48-iN-ilH" secondAttribute="leading" id="Tsb-fo-eYN"/>
@@ -81,6 +80,7 @@
                             <constraint firstAttribute="trailing" secondItem="Iuq-p7-pge" secondAttribute="trailing" id="tvQ-Pf-Amd"/>
                             <constraint firstAttribute="trailing" secondItem="VjX-lb-dwS" secondAttribute="trailing" id="wDG-9D-Hhg"/>
                             <constraint firstItem="zfh-eY-Qvq" firstAttribute="top" secondItem="cTj-ki-pMw" secondAttribute="bottom" constant="39" id="wtA-4e-TcV"/>
+                            <constraint firstItem="cTj-ki-pMw" firstAttribute="top" secondItem="Iuq-p7-pge" secondAttribute="bottom" constant="10" id="yFy-XK-lZM"/>
                             <constraint firstItem="Iuq-p7-pge" firstAttribute="leading" secondItem="i48-iN-ilH" secondAttribute="leading" id="zmR-kI-a0n"/>
                         </constraints>
                     </view>
@@ -112,7 +112,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6S5-SX-2nT" id="Gw2-2e-8iI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
