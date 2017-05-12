@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,13 +21,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TruckNow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbT-Rd-iVe">
-                                <rect key="frame" x="98" y="313" width="179" height="41"/>
+                                <rect key="frame" x="108" y="314" width="159.5" height="39.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find delicious food trucks nearby" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3v-ft-28a">
-                                <rect key="frame" x="50" y="362" width="275" height="21"/>
+                                <rect key="frame" x="52" y="361.5" width="271" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.99178459449552214" blue="0.68993963958375693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,13 +35,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94490245165745856" green="0.73351255300001128" blue="0.21538244990905772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TbT-Rd-iVe" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="293" id="22n-7i-HFY"/>
                             <constraint firstItem="TbT-Rd-iVe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IBv-V0-fyS"/>
-                            <constraint firstItem="a3v-ft-28a" firstAttribute="top" secondItem="TbT-Rd-iVe" secondAttribute="bottom" constant="8" symbolic="YES" id="Pgv-sY-OLb"/>
-                            <constraint firstItem="a3v-ft-28a" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="34" id="Zgx-OR-Ehf"/>
-                            <constraint firstItem="TbT-Rd-iVe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="82" id="icb-P7-cwW"/>
+                            <constraint firstItem="a3v-ft-28a" firstAttribute="top" secondItem="TbT-Rd-iVe" secondAttribute="bottom" constant="8" symbolic="YES" id="lLO-bT-aWQ"/>
                             <constraint firstItem="TbT-Rd-iVe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="p0o-wy-MhR"/>
-                            <constraint firstItem="TbT-Rd-iVe" firstAttribute="centerX" secondItem="a3v-ft-28a" secondAttribute="centerX" id="rE1-HB-G7L"/>
+                            <constraint firstItem="a3v-ft-28a" firstAttribute="centerX" secondItem="TbT-Rd-iVe" secondAttribute="centerX" id="pES-AA-Zq3"/>
                         </constraints>
                     </view>
                 </viewController>
