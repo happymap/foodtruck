@@ -107,6 +107,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
             
             DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()
+                if self.truckList.count == 0 {
+                    let alert = UIAlertController(title: "Sorry!", message: "No trucks are available nearby today, please come back check later.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             })
         }) 
         
