@@ -2,9 +2,9 @@
 
 Find nearby food trucks
 
-Supported Truck List(SF area)
-*JapaCurry
-*Senor Sisig
+## Supported Truck List(SF area)
+* JapaCurry
+* Senor Sisig
 
-Pending trucks
-*CurryUpNow
+## Pending trucks
+* CurryUpNow
