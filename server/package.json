@@ -12,6 +12,7 @@
 		"sequelize": "3.11.0",
 		"async": "1.4.2",
 		"scraperjs": "1.2.0",
-		"request": "2.75.0"
+		"request": "2.75.0",
+		"morgan": "1.8.1"
 	}
 }

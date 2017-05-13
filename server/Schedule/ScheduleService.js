@@ -1,3 +1,7 @@
+var morgan = require('morgan');
+var path = require('path');
+var fs = require('fs');
+
 var SchedulePersistence = require('./SchedulePersistence');
 
 var Module = function() {
@@ -17,6 +21,11 @@ var sampleSchedule =  {
 };
 
 Module.prototype.attachRoutes = function(server) {
+
+	var accessLogStream = fs.createWriteStream(path.join(__dirname + "/../../", 'access.log'), {flags: 'a'});
+	// setup the logger
+	server.use(morgan('combined', {stream: accessLogStream}));
+	
 	server.get('/schedule/:truckId', this.getSchedulesByTruckId);
 	server.post('/schedule/crud', this.updateSchedules);
 };

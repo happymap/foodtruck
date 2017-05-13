@@ -1,9 +1,18 @@
+var morgan = require('morgan');
+var path = require('path');
+var fs = require('fs');
+
 var TruckPersistence = require('./TruckPersistence');
 
 var Module = function() {
 };
 
 Module.prototype.attachRoutes = function(server) {
+
+	var accessLogStream = fs.createWriteStream(path.join(__dirname + "/../../../", 'access.log'), {flags: 'a'});
+	// setup the logger
+	server.use(morgan('combined', {stream: accessLogStream}));
+	
 	server.get('/truck/map', this.getTruckByRange);
 	server.get('/truck/list', this.getTrucks);
 	server.get('/truck/:id', this.getTruckById);
