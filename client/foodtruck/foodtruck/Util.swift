@@ -99,7 +99,12 @@ class Util {
     class func getDayOfWeek() -> Int {
         let date = Date()
         let calendar = Calendar.current
-        let day = calendar.component(.weekday, from: date)
+        var day = calendar.component(.weekday, from: date)
+        
+        if day - 2 < 0 {
+            day = day + 7
+        }
+        
         return day - 2
     }
     
