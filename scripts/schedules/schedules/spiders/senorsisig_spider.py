@@ -17,7 +17,7 @@ DAYS_MAP = {
 
 class SenorSisigSpider(scrapy.Spider):
 	name = "senorsisig"
-	start_urls = ["http://www.senorsisig.com"];
+	start_urls = ["http://www.senorsisig.com"]
 
 	def parse(self, response):
 
