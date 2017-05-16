@@ -107,15 +107,19 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         let url = URL(string: Util.getEnvProperty("host") + "/truck/list?lat=" + String(currentLat) + "&lon=" + String(currentLong) + "&day=\(day)")
 
         let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
+            
+            if error != nil {
+                self.alert("Sorry!", message: "Server error. Please try it later.")
+                return
+            }
+            
             print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
             self.truckList = Util.JSONParseArray(NSString(data: data!, encoding:String.Encoding.utf8.rawValue)! as String)
             
             DispatchQueue.main.async(execute: { () -> Void in
                 self.tableView.reloadData()
                 if self.truckList.count == 0 {
-                    let alert = UIAlertController(title: "Sorry!", message: "No trucks are available nearby today, please come back check later.", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.alert("Sorry!", message: "No trucks are available nearby today, please come back check later.")
                 }
             })
         }) 
@@ -129,6 +133,12 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         if self.refreshControl!.isRefreshing {
             self.refreshControl!.endRefreshing()
         }
+    }
+    
+    func alert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
