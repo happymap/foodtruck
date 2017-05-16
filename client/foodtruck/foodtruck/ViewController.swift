@@ -83,12 +83,17 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coord = ((locations as NSArray).lastObject as! CLLocation).coordinate
-        self.currentLat = coord.latitude
-        self.currentLong = coord.longitude
         
-        // stop update after
-        self.locationManager.stopUpdatingLocation();
-        self.refreshTable()
+        if currentLat != nil && currentLong != nil {
+            self.currentLat = coord.latitude
+            self.currentLong = coord.longitude
+        } else {
+            self.currentLat = coord.latitude
+            self.currentLong = coord.longitude
+            
+            // refresh the table for the intial location
+            self.refreshTable()
+        }
     }
 
     func refreshTable() {
