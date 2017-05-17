@@ -27,7 +27,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         // get location
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 100
         locationManager.startUpdatingLocation()
         

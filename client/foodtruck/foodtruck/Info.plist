@@ -31,10 +31,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>always use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>when is use</string>
+	<string>Your location may be shown on the map and be used to find nearby food trucks.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
