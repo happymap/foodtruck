@@ -7,6 +7,7 @@ Find nearby food trucks
 * Senor Sisig
 * CurryUpNow
 * The Chairman
+* Slider Shack
 
 ## Pending trucks
 * Koja
