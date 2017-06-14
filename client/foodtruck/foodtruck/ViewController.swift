@@ -18,6 +18,8 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     var currentLat:Double!
     var currentLong:Double!
     
+    var centerLabel:UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +40,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         if let navigationBar = self.navigationController?.navigationBar {
             let centerFrame = CGRect(x: navigationBar.frame.width/4, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height/4)
             
-            let centerLabel = UILabel(frame: centerFrame)
+            centerLabel = UILabel(frame: centerFrame)
             centerLabel.textAlignment = .center
             centerLabel.text = Util.getDayStrOfWeek()!
             centerLabel.font = UIFont(name: "Helvetica", size: 10.0)
@@ -128,7 +130,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     func handleRefresh(_ sender: AnyObject?) {
+        // refresh search results
         self.refreshTable()
+        
+        // refresh date label
+        centerLabel.text = Util.getDayStrOfWeek()!
         
         if self.refreshControl!.isRefreshing {
             self.refreshControl!.endRefreshing()
