@@ -7,6 +7,16 @@ from DBUtil import *
 GEOCODE_API_KEY = "AIzaSyBc4QTunojKpcQRXLFaXlYi5gBF9Z2irS0"
 GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 
+DAYS_MAP = {
+    "mon": 0,
+    "tue": 1,
+    "wed": 2,
+    "thu": 3,
+    "fri": 4,
+    "sat": 5,
+    "sun": 6
+}
+
 def get_coordinate_by_address(address):
     params = urllib.urlencode({"address": address, "key": GEOCODE_API_KEY})
     url = GEOCODE_URL + "?" + params
@@ -72,7 +82,7 @@ def parse_times_string(timeStr):
     amOrPm = timeStr[len(timeStr) - 2:]
     time = timeStr[:len(timeStr) - 2]
     hour = int(time.split(":")[0])
-    minute = int(time.splt(":")[1])
+    minute = int(time.split(":")[1])
 
     if amOrPm == "pm":
         hour += 12
