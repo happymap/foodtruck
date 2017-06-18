@@ -8,6 +8,8 @@ Find nearby food trucks
 * CurryUpNow
 * The Chairman
 * Slider Shack
+* The halal cart
+* bowl'd acai
 
 ## Pending trucks
 * Koja
