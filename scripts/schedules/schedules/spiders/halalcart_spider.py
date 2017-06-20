@@ -26,8 +26,9 @@ class CurryUpNowSpider(scrapy.Spider):
                 
                 address = ""
                 for loc in locations:
-                    address += loc.extract() + " "
-                address = address.strip()
+                    address += loc.extract().replace('.', '') + ", "
+
+                address = address[0 : len(address) - 2].strip()
 
                 dateTime = locationAndTime[1].xpath('.//span/text()')
                 dayStr = dateTime[0].extract()
