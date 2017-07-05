@@ -12,3 +12,4 @@ do
 done
 
 python $DIR/../scripts/schedules/slidershack_spider.py
+python $DIR/../scripts/schedules/static_trucks.py
