@@ -10,6 +10,7 @@ Find nearby food trucks
 * Slider Shack
 * The halal cart
 * bowl'd acai
+* El Gallo Giro
 
 ## Pending trucks
 * Koja
