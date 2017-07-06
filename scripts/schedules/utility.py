@@ -17,6 +17,26 @@ DAYS_MAP = {
     "sun": 6
 }
 
+FULL_DAYS_MAP = {
+    "monday": 0,
+    "tuesday": 1,
+    "wednesday": 2,
+    "thursday": 3,
+    "friday": 4,
+    "saturday": 5,
+    "sunday": 6
+}
+
+FULL_DAYS_PLURAL_MAP = {
+    "mondays": 0,
+    "tuesdays": 1,
+    "wednesdays": 2,
+    "thursdays": 3,
+    "fridays": 4,
+    "saturdays": 5,
+    "sundays": 6
+}
+
 def get_coordinate_by_address(address):
     params = urllib.urlencode({"address": address, "key": GEOCODE_API_KEY})
     url = GEOCODE_URL + "?" + params
