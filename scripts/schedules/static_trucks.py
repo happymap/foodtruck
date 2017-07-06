@@ -1,4 +1,5 @@
 import csv
+import os 
 
 from schedules.items import SchedulesItem
 from DBUtil import *
@@ -7,7 +8,8 @@ STATIC_TRUCKS_LIST = ['el_gallo_giro.csv']
 truck_id = -1
 
 for fileName in STATIC_TRUCKS_LIST:
-    with open('static_trucks/' + fileName, 'rb') as csvfile:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(dir_path + '/static_trucks/' + fileName, 'rb') as csvfile:
         filereader = csv.reader(csvfile, delimiter=',', quotechar='"')
         get_db().begin()
         try:
