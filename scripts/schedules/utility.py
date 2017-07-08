@@ -53,10 +53,13 @@ def get_coordinate_by_address(address):
         if component['types'][0] == "postal_code":
             zip = component['long_name']
 
+    print address_components
+
     return {
                 "latitude": data['results'][0]['geometry']['location']['lat'], 
                 "longitude": data['results'][0]['geometry']['location']['lng'],
-                "zip": zip
+                "zip": zip,
+                "address": data['results'][0]['formatted_address']
             }
 
 def formalize_address(address):
