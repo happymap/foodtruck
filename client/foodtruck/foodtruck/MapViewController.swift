@@ -32,7 +32,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.startUpdatingLocation()
         
         mapView.delegate = self
-        
+        mapView.showsUserLocation = true
     }
     
     func loadTrucks(_ maxLat: Double, maxLon: Double, minLat: Double, minLon: Double) {
@@ -56,7 +56,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func refreshMap() {
         // remove all annotations
         let allAnnotations = self.mapView.annotations
-        self.mapView.removeAnnotations(allAnnotations)
+        for annotation in allAnnotations {
+            if (annotation.isKind(of: MKUserLocation.self)) {
+                continue
+            }
+            self.mapView.removeAnnotation(annotation)
+        }
         
         // add annotations
         for truck in truckList as! [NSDictionary] {
@@ -93,22 +98,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = (annotation as! Annotation).identifier
-        
-        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(identifier)) {
-            annotationView.annotation = annotation
-            return annotationView
-        } else {
-            let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:String(identifier))
-            annotationView.isEnabled = true
-            annotationView.canShowCallout = true
+        guard annotation.isKind(of: MKUserLocation.self) else {
+            let identifier = (annotation as! Annotation).identifier
             
-            let btn = UIButton(type: .detailDisclosure)
-            annotationView.rightCalloutAccessoryView = btn
-            btn.addTarget(self, action: #selector(MapViewController.buttonClicked(_:)), for: .touchUpInside)
-            btn.tag = identifier
-            return annotationView
+            
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(identifier)) {
+                annotationView.annotation = annotation
+                return annotationView
+            } else {
+                let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:String(identifier))
+                annotationView.isEnabled = true
+                annotationView.canShowCallout = true
+                
+                let btn = UIButton(type: .detailDisclosure)
+                annotationView.rightCalloutAccessoryView = btn
+                btn.addTarget(self, action: #selector(MapViewController.buttonClicked(_:)), for: .touchUpInside)
+                btn.tag = identifier
+                return annotationView
+            }
         }
+        
+        return nil
     }
     
     func buttonClicked(_ sender: AnyObject?) {

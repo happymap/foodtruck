@@ -60,5 +60,7 @@ open class TruckDetailsModalController: UIViewController {
         
         let annotation = Annotation(title: "Japa Curry", identifier: details.value(forKey: "truck_id") as! Int, coordinate: coord)
         mapView.addAnnotation(annotation)
+        
+        mapView.showsUserLocation = true
     }
 }
