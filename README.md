@@ -12,6 +12,7 @@ Find nearby food trucks
 * bowl'd acai
 * El Gallo Giro
 * Del Popolo
+* Primavera
 
 ## NYC trucks
 * Tony Dragon's Grille
