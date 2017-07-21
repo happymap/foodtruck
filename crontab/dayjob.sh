@@ -7,7 +7,8 @@ JOBS=("bowldacai_spider.py"
 	  "japacurry_spider.py" 
 	  "senorsisig_spider.py"
 	  "tony_dragon_grille.py"
-	  "delpopolo_spider.py")
+	  "delpopolo_spider.py"
+	  "primavera_spider.py")
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DIR/../bin/activate
