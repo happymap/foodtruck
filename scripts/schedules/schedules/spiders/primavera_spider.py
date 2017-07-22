@@ -39,7 +39,7 @@ class PrimaveraSpider(scrapy.Spider):
                 item['latitude'] = 37.7955307
                 item['longitude'] = -122.3951161
                 item['zip'] = "94111"
-                item['address'] = "1 Ferry Plz Ferry Plaza Farmers Market San Francisco, CA 94111"
+                item['address'] = "1 Ferry Plz Ferry Plaza Farmers Market, San Francisco, CA 94111"
                 item['city'] = 'San Francisco'
                 item['state'] = 'CA'
                 item['truck_id'] = TRUCK_ID
